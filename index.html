@@ -15,7 +15,17 @@
         <script src="libraries/three.min.js" charset="utf-8"></script>
         <script src="libraries/physi.js" charset="utf-8"></script>
 
+
+        <script type="text/javascript">
+            Physijs.scripts.worker = 'libraries/physijs_worker.js';
+            Physijs.scripts.ammo = 'ammo.js';
+
+            var scene = new Physijs.Scene();
+        </script>
+
+        <script src="camera.js" charset="utf-8"></script>
         <script src="cube.js" charset="utf-8"></script>
-        <script src="scene.js" charset="utf-8"></script>
+
+        <script src="render.js" charset="utf-8"></script>
     </body>
 </html>
