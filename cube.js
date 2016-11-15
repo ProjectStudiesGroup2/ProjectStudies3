@@ -1,26 +1,32 @@
-var geometry = new THREE.BoxGeometry(1, 1, 1);
-var material = new THREE.MeshLambertMaterial({ color: 0x1f8b08 });
-var cube = new Physijs.BoxMesh(geometry, material);
-var cube2 = new Physijs.BoxMesh(geometry, material);
-cube.position.set(0, 10, 0);
-cube.castShadow = true;
+var cube1 = new Physijs.BoxMesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshLambertMaterial({ color: 0x1c5400 })
+);
+cube1.position.set(0, 10, 0);
+cube1.castShadow = true;
+scene.add(cube1);
+
+var cube2 = new Physijs.BoxMesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshLambertMaterial({ color: 0x1c5400 })
+);
 cube2.castShadow = true;
-scene.add(cube);
 scene.add(cube2);
 
 
+
+
 var speed = 20;
-var curr = cube;
+var curr = cube1;
+var cubes = [cube1, cube2]; var idx = 0;
+curr.material.color.set(0x38a800);
 
 var pressed = {};
 document.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        case "a":
-            curr = cube;
-            break;
-        case "e":
-            curr = cube2;
-            break;
+    if (event.key == "a") {
+        curr.material.color.set(0x1c5400);
+        idx += 1; idx %= 2; curr = cubes[idx];
+        curr.material.color.set(0x38a800);
     }
 
     lv = curr.getLinearVelocity();
