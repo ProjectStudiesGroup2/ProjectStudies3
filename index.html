@@ -4,16 +4,17 @@
         <meta charset="utf-8">
         <title>Football game</title>
         <style media="screen">
-            body { margin: 0; }
+            body { margin: 0; overflow: hidden; }
             canvas { width: 100%; height: 100% }
         </style>
     </head>
     <body>
 
-        
+
 
         <script src="libraries/three.min.js" charset="utf-8"></script>
         <script src="libraries/physi.js" charset="utf-8"></script>
+        <script src="libraries/OrbitControls.js" charset="utf-8"></script>
 
 
         <script type="text/javascript">
@@ -21,10 +22,20 @@
             Physijs.scripts.ammo = 'ammo.js';
 
             var scene = new Physijs.Scene();
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(0xdddddd);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMapSoft = true;
+            document.body.appendChild(renderer.domElement);
         </script>
 
-        <script src="camera.js" charset="utf-8"></script>
+        <script src="field.js" charset="utf-8"></script>
+        <script src="light.js" charset="utf-8"></script>
         <script src="cube.js" charset="utf-8"></script>
+        <script src="ball.js" charset="utf-8"></script>
+        <script src="camera.js" charset="utf-8"></script>
 
         <script src="render.js" charset="utf-8"></script>
     </body>
