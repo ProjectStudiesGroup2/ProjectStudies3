@@ -15,7 +15,6 @@ scene.add(cube2);
 
 
 
-
 var speed = 20;
 var curr = cube1;
 var cubes = [cube1, cube2]; var idx = 0;
@@ -23,7 +22,7 @@ curr.material.color.set(0x38a800);
 
 var pressed = {};
 document.addEventListener('keydown', (event) => {
-    if (event.key == "a") {
+    if (event.code == "KeyE") {
         curr.material.color.set(0x1c5400);
         idx += 1; idx %= 2; curr = cubes[idx];
         curr.material.color.set(0x38a800);
@@ -31,44 +30,44 @@ document.addEventListener('keydown', (event) => {
 
     lv = curr.getLinearVelocity();
 
-    if (!pressed[event.key]) {
-        switch (event.key) {
-            case "z":
+    if (!pressed[event.code]) {
+        switch (event.code) {
+            case "KeyW":
                 curr.setLinearVelocity(
                     lv.add({ x: 0, y: 0, z: -speed })
                 );
                 break;
-            case "q":
+            case "KeyA":
                 curr.setLinearVelocity(
                     lv.add({ x: -speed, y: 0, z: 0 })
                 );
                 break;
-            case "s":
+            case "KeyS":
                 curr.setLinearVelocity(
                     lv.add({ x: 0, y: 0, z: speed })
                 );
                 break;
-            case "d":
+            case "KeyD":
                 curr.setLinearVelocity(
                     lv.add({ x: speed, y: 0, z: 0 })
                 );
                 break;
         }
-        pressed[event.key] = true;
+        pressed[event.code] = true;
     }
 }, false);
 
 document.addEventListener('keyup', (event) => {
     lv = curr.getLinearVelocity();
 
-    pressed[event.key] = false;
-    switch (event.key) {
-        case "z": case "s":
+    pressed[event.code] = false;
+    switch (event.code) {
+        case "KeyW": case "KeyS":
             curr.setLinearVelocity(
                 lv.add({ x: 0, y: 0, z: -lv.z })
             );
             break;
-        case "q": case "d":
+        case "KeyA": case "KeyD":
             curr.setLinearVelocity(
                 lv.add({ x: -lv.x, y: 0, z: 0 })
             );
