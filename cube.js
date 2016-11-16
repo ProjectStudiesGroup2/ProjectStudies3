@@ -12,7 +12,7 @@ for (var i = 0; i < 2/*4*/; i++) {
 
 
 var current = 0; cubes[current].material.color.set(0xbf8600);
-function changeCurrent(newIndex) {
+function changeCurrent(newIndex = ) {
     cubes[current].material.color.set(0x805900);
     current = newIndex;
     cubes[current].material.color.set(0xbf8600);
@@ -32,7 +32,7 @@ function getTheClosestTo(vec) {
 var speed = 20; var pressed = {};
 document.addEventListener('keydown', (event) => {
     if (event.code == "KeyE") {
-        changeCurrent(getTheClosestTo({ x: 0, y: 0, z: 0 }));
+        changeCurrent();
     }
 
     lv = cubes[current].getLinearVelocity();
@@ -81,3 +81,18 @@ document.addEventListener('keyup', (event) => {
             break;
     }
 }, false);
+
+
+
+var gamepads = {};
+function gamepadHandler(event, connecting) {
+    var gamepad = event.gamepad;
+    if (connecting) {
+        gamepads[gamepad.index] = gamepad;
+    } else {
+        delete gamepads[gamepad.index];
+    }
+}
+
+window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
+window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
