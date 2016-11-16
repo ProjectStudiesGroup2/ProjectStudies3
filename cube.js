@@ -10,6 +10,12 @@ for (var i = 0; i < 2/*4*/; i++) {
 }
 
 
+var current = 0; cubes[current].material.color.set(0xbf8600);
+function changeCurrent(newIndex) {
+    cubes[current].material.color.set(0x805900);
+    current = newIndex;
+    cubes[current].material.color.set(0xbf8600);
+}
 
 function getTheClosestTo(vec) {
     var min = Infinity; var res;
@@ -22,15 +28,10 @@ function getTheClosestTo(vec) {
     return res;
 }
 
-var current = 0;
-cubes[current].material.color.set(0xbf8600);
-
 var speed = 20; var pressed = {};
 document.addEventListener('keydown', (event) => {
     if (event.code == "KeyE") {
-        cubes[current].material.color.set(0x805900);
-        current = getTheClosestTo({ x: 0, y: 0, z: 0 })
-        cubes[current].material.color.set(0xbf8600);
+        changeCurrent(getTheClosestTo({ x: 0, y: 0, z: 0 }));
     }
 
     lv = cubes[current].getLinearVelocity();
