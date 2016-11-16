@@ -1,4 +1,3 @@
-
 var cubes = {};
 for (var i = 0; i < 2/*4*/; i++) {
     cubes[i] = new Physijs.BoxMesh(
