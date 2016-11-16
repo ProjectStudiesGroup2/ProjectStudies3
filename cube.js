@@ -12,7 +12,7 @@ for (var i = 0; i < 2/*4*/; i++) {
 
 
 var current = 0; cubes[current].material.color.set(0xbf8600);
-function changeCurrent(newIndex = ) {
+function changeCurrent(newIndex = getTheClosestTo({ x: 0, y: 0, z: 0 })) {
     cubes[current].material.color.set(0x805900);
     current = newIndex;
     cubes[current].material.color.set(0xbf8600);
