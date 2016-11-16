@@ -11,9 +11,10 @@ var goalT = true;
     /*** Object ***/
 var ball = new Physijs.SphereMesh(
     new THREE.SphereGeometry(1.3, 12, 12),
-    new THREE.MeshLambertMaterial({ color: 0xffffff, map: textureBall})
+    new THREE.MeshLambertMaterial({ color: 0xffffff, map: textureBall}),
+    10
 );
-ball.position.set(0, 5.5, 20);
+ball.position.set(0, 5.5, -10);
 ball.castShadow = true;
 scene.add(ball);
 
