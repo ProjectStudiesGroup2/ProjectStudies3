@@ -1,8 +1,10 @@
+
 var cubes = {};
 for (var i = 0; i < 2/*4*/; i++) {
     cubes[i] = new Physijs.BoxMesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshLambertMaterial({ color: 0x805900 })
+        new THREE.MeshLambertMaterial({ color: 0x805900 }),
+        50
     );
     cubes[i].position.set(i * 2 - 1/*3*/, 0, 0);
     cubes[i].castShadow = true;
