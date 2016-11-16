@@ -1,6 +1,9 @@
                 /************\
 				|*   Ball   *|
 				\************/
+var textureLoader = new THREE.TextureLoader();
+var textureBall = textureLoader.load("img/ball.png");
+textureBall.anisotropy = 3;     //lower value if the view is too laggy
 
     /*** To hide the goal message ***/
 var goalT = true;
@@ -8,7 +11,7 @@ var goalT = true;
     /*** Object ***/
 var ball = new Physijs.SphereMesh(
     new THREE.SphereGeometry(1.3, 12, 12),
-    new THREE.MeshLambertMaterial({ color: 0xffffff })
+    new THREE.MeshLambertMaterial({ color: 0xffffff, map: textureBall})
 );
 ball.position.set(0, 5.5, 20);
 ball.castShadow = true;
