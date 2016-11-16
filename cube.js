@@ -1,47 +1,35 @@
 var cubes = {};
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 2/*4*/; i++) {
     cubes[i] = new Physijs.BoxMesh(
         new THREE.BoxGeometry(1, 1, 1),
         new THREE.MeshLambertMaterial({ color: 0x805900 })
     );
-    cubes[i].position.set(i * 2 - 1, 0, 0);
+    cubes[i].position.set(i * 2 - 1/*3*/, 0, 0);
     cubes[i].castShadow = true;
     scene.add(cubes[i]);
 }
 
 
 
-// function getTheClosestTo(vec) {
-//     var min = Infinity; var res;
-//
-//     for (var i in cubes) {
-//         if (cubes[i].position.distanceTo(vec) < min && i != current)
-//             res = i;
-//     }
-//
-//     return res;
-// }
-//
-//
-//
-// function changeCurrent() {
-//     cubes[current].material.color.set(0x805900);
-//
-//     current = getTheClosestTo({ x: 0, y: 0, z: 0 });;
-//
-//     cubes[current].material.color.set(0xbf8600);
-// }
-
+function getTheClosestTo(vec) {
+    var min = Infinity; var res;
+    for (var i in cubes) {
+        var dist = cubes[i].position.distanceTo(vec);
+        if (dist < min && i != current) {
+            min = dist; res = i;
+        }
+    }
+    return res;
+}
 
 var current = 0;
 cubes[current].material.color.set(0xbf8600);
-// changeCurrent();
 
 var speed = 20; var pressed = {};
 document.addEventListener('keydown', (event) => {
     if (event.code == "KeyE") {
         cubes[current].material.color.set(0x805900);
-        current += 1; current %= 2;
+        current = getTheClosestTo({ x: 0, y: 0, z: 0 })
         cubes[current].material.color.set(0xbf8600);
     }
 
