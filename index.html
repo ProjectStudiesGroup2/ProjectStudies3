@@ -7,11 +7,12 @@
             body { margin: 0; overflow: hidden; }
             canvas { width: 100%; height: 100% }
         </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
 
 
-
+        <script src="libraries/KeyboardState.js" charset="utf-8"></script>
         <script src="libraries/three.min.js" charset="utf-8"></script>
         <script src="libraries/physi.js" charset="utf-8"></script>
         <script src="libraries/OrbitControls.js" charset="utf-8"></script>
@@ -30,6 +31,8 @@
             renderer.shadowMapSoft = true;
             document.body.appendChild(renderer.domElement);
         </script>
+
+        <p id="message"></p>
 
         <script src="field.js" charset="utf-8"></script>
         <script src="light.js" charset="utf-8"></script>

@@ -1,3 +1,6 @@
+// To detect Collisions
+var collizionDet = false;
+// 
 
 var cubes = {};
 for (var i = 0; i < 2/*4*/; i++) {
@@ -26,6 +29,7 @@ function getTheClosestTo(vec) {
 
 var current = 0;
 cubes[current].material.color.set(0xbf8600);
+
 
 var speed = 20; var pressed = {};
 document.addEventListener('keydown', (event) => {
@@ -81,3 +85,36 @@ document.addEventListener('keyup', (event) => {
             break;
     }
 }, false);
+
+
+// // Test cube
+
+// var MovingCube;
+// var cubeGeometry = new THREE.CubeGeometry(2,2,2,1,1,1);
+// var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true } );
+// MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
+// MovingCube.position.set(0, -4, 0);
+// scene.add( MovingCube );	
+
+// var moveDistance = 1; // 200 pixels per second
+  
+// document.addEventListener('keydown',onDocumentKeyDown,false);
+//     function onDocumentKeyDown(event){
+//     event = event || window.event;
+//     var keycode = event.keyCode;
+//     switch(keycode){
+//         case 37 : //left arrow 向左箭头
+//         MovingCube.position.x = MovingCube.position.x - moveDistance;
+//         break;
+//         case 38 : // up arrow 向上箭头 
+//         MovingCube.position.z = MovingCube.position.z - moveDistance;
+//         break;
+//         case 39 : // right arrow 向右箭头
+//         MovingCube.position.x = MovingCube.position.x + moveDistance;
+//         break;
+//         case 40 : //down arrow向下箭头
+//         MovingCube.position.z = MovingCube.position.z + moveDistance;
+//         break;
+//     }
+//     console.log(MovingCube.position);
+// }
