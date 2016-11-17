@@ -10,7 +10,7 @@ class Team {
 
         for (var i = 0; i < nbPlayers; i++) {
             this.players[i] = new Physijs.BoxMesh(
-                new THREE.BoxGeometry(1, 1, 1),
+                new THREE.BoxGeometry(2, 3, 2),
                 new THREE.MeshLambertMaterial({ color: 0x805900 }),
                 50
             );
