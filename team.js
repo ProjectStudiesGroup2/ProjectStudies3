@@ -12,25 +12,25 @@ class Team {
             switch (i) {
                 case 0:
                     this.players[i] = new Player(
-                        { x: -50/3, y: -4, z: 85/3 },
+                        { x: -50/3, y: -4, z: -85/3 },
                         this._speed
                     )
                     break;
                 case 1:
                     this.players[i] = new Player(
-                        { x: 50/3, y: -4, z: 85/3 },
+                        { x: 50/3, y: -4, z: -85/3 },
                         this._speed
                     )
                     break;
                 case 2:
                     this.players[i] = new Player(
-                        { x: -50/3, y: -4, z: -85/3 },
+                        { x: -50/3, y: -4, z: 85/3 },
                         this._speed
                     )
                     break;
                 case 3:
                     this.players[i] = new Player(
-                        { x: 50/3, y: -4, z: -85/3 },
+                        { x: 50/3, y: -4, z: 85/3 },
                         this._speed
                     )
                     break;
