@@ -13,7 +13,7 @@ class Player {
         this.mesh.position.set(
             this.startingPoint.x,
             this.startingPoint.y,
-            this.startingPoint.z / 2
+            this.startingPoint.z - 85 / 2
         );
         this.mesh.castShadow = true;
         scene.add(this.mesh);
