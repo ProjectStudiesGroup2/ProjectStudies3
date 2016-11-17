@@ -23,7 +23,7 @@ class Team {
 
 
         document.addEventListener('keydown', event => {
-            if (event.code == "KeyE") {
+            if (event.code == "KeyE" && collizionDet == false ) {
                 this.changePlayer();
             }
 
@@ -102,7 +102,7 @@ class Team {
             z: ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed) - lv.z
         }));
 
-        if (gamepad.buttons[0].pressed && !this._pressed["A"]) {
+        if (gamepad.buttons[0].pressed && !this._pressed["A"] && collizionDet == false ) {
             this._pressed["A"] = true;
             this.changePlayer;
         } else if (!gamepad.buttons[0].pressed && this._pressed["A"]) {
@@ -117,7 +117,5 @@ class Team {
         )
     }
 }
-
-
 
 var cubes = new Team(2);
