@@ -1,7 +1,7 @@
 var render = function() {
     requestAnimationFrame(render);
 
-    camera.lookAt(field.position);
+    camera.lookAt(ball.position);
 
     if (gamepads[0]) {
         cubes.useGamepad(gamepads[0]);
