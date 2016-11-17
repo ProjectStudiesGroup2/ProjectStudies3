@@ -2,16 +2,12 @@ var render = function() {
     requestAnimationFrame(render);
 
     camera.lookAt(field.position);
-
-    clearText();    
-    var originPoint = cubes[current].position.clone();
  
-    detectCollision();
+    detectCollision();    
     
     if (collizionDet == true) {
-        ball.position.set( cubes[current].position.x + 2, cubes[current].position.y + 2, cubes[current].position.z);
+        ball.position.set( cubes[current].position.x, cubes[current].position.y + 0.9, cubes[current].position.z - 2);        
         ball.__dirtyPosition = true;
-
     }
 
     scene.simulate();

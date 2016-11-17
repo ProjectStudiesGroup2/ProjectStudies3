@@ -1,8 +1,6 @@
                 /************\
 				|*   Ball   *|
 				\************/
-var collidableMeshList = [];
-
 // // Wall
 // var wallGeometry = new THREE.CubeGeometry( 10, 10, 10, 1, 1, 1 );
 // 	var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
@@ -13,6 +11,8 @@ var collidableMeshList = [];
 // 	scene.add(wall);
 // 	collidableMeshList.push(wall);
 // // 
+
+var collidableMeshList = [];
 
 var textureLoader = new THREE.TextureLoader();
 var textureBall = textureLoader.load("img/ball.png");
@@ -25,9 +25,9 @@ var ball = new Physijs.SphereMesh(
     new THREE.MeshLambertMaterial({ color: 0xffffff, map: textureBall}),
     20
 );
+
 if (collizionDet == true) {
-    ball.position.set( cubes[current].position.x + 2, cubes[current].position.y + 2, cubes[current].position.z);
-    ball.__dirtyPosition = true;
+    ball.position.set( cubes[current].position.x, cubes[current].position.y, cubes[current].position.z);
 }
 else if (collizionDet == false) {
     ball.position.set(0, 5.5, -10);
@@ -38,16 +38,10 @@ ball.castShadow = true;
 scene.add(ball);
 collidableMeshList.push(ball);
 
-function clearText()
-{   document.getElementById('message').innerHTML = '..........';   }
-function appendText(txt)
-{   document.getElementById('message').innerHTML += txt;   }
-
-
 // Detecting collizion between cube and a ball function
 function detectCollision() {        
     var originPoint = cubes[current].position.clone();
-    for (var vertexIndex = 0; vertexIndex < cubes[current].geometry.vertices.length; vertexIndex++)
+    for (var vertexIndex = 0; vertexIndex < cubes[current].geometry.vertices.length; vertexIndex++ )
         {		
             var localVertex = cubes[current].geometry.vertices[vertexIndex].clone();
             var globalVertex = localVertex.applyMatrix4( cubes[current].matrix );
@@ -56,15 +50,34 @@ function detectCollision() {
             var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
             var collisionResults = ray.intersectObjects( collidableMeshList );
             if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
-                    appendText(" Hit "); 
-                    var collizionDet = true;                   
-                    // ball.position.set( cubes[current].position.x + 2, cubes[current].position.y + 2, cubes[current].position.z);
-                    // ball.__dirtyPosition = true;   
-                    return collizionDet;        
-            }			
+                collizionDet = true;       
+            }	
         }
-    return false;
-};
+}
+
+// Kicking the ball 
+var ballMoving = false;
+var lastKeyUpAt = -1;
+var ballSpeed = 7;
+var ballVertAngle = 0;
+var space = "Space";
+
+document.addEventListener('keydown', function(event) {
+     var ballLV = ball.getLinearVelocity();
+
+     if (event.code == space && collizionDet == true ) {
+         ball.setLinearVelocity(
+            ballLV.add({
+                x: ballSpeed,
+                y: 5,
+                z: 0 })
+        );
+        ballMoving = true;
+        collizionDet = false; 
+     }
+     return collizionDet;
+});
+
 
 //     /*** Controls ***/
 // var ballMoving = false;

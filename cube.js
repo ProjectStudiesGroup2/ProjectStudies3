@@ -33,7 +33,7 @@ cubes[current].material.color.set(0xbf8600);
 
 var speed = 20; var pressed = {};
 document.addEventListener('keydown', (event) => {
-    if (event.code == "KeyE") {
+    if (event.code == "KeyE" && collizionDet == false ) {
         cubes[current].material.color.set(0x805900);
         current = getTheClosestTo({ x: 0, y: 0, z: 0 })
         cubes[current].material.color.set(0xbf8600);
