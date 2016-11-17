@@ -6,7 +6,7 @@ class Player {
         this.coverage = 2/3;
 
         this.mesh = new Physijs.BoxMesh(
-            new THREE.BoxGeometry(2, 3, 2),
+            new THREE.BoxGeometry(1, 1, 1),
             new THREE.MeshLambertMaterial({ color: 0x805900 }),
             50
         );
