@@ -9,6 +9,10 @@ var render = function() {
         cubes.useGamepad(gamepads[0]);
     }
 
+    for (var i in cubes.AIPlayers) {
+        cubes.AIPlayers[i].useAI();
+    }
+
 
     detectCollision();
 

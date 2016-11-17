@@ -9,10 +9,32 @@ class Team {
         this._pressed = {};
 
         for (var i = 0; i < nbPlayers; i++) {
-            this.players[i] = new Player(
-                { x: i * 2 - (nbPlayers - 1), y: 0, z: 0 },
-                this._speed
-            )
+            switch (i) {
+                case 0:
+                    this.players[i] = new Player(
+                        { x: -50/3, y: -4, z: 85/3 },
+                        this._speed
+                    )
+                    break;
+                case 1:
+                    this.players[i] = new Player(
+                        { x: 50/3, y: -4, z: 85/3 },
+                        this._speed
+                    )
+                    break;
+                case 2:
+                    this.players[i] = new Player(
+                        { x: -50/3, y: -4, z: -85/3 },
+                        this._speed
+                    )
+                    break;
+                case 3:
+                    this.players[i] = new Player(
+                        { x: 50/3, y: -4, z: -85/3 },
+                        this._speed
+                    )
+                    break;
+            }
         }
 
         this.player.material.color.set(0xbf8600);
@@ -74,14 +96,16 @@ class Team {
 
     get player () { return this.players[this._current].mesh }
 
-    changePlayer() {
+    changePlayer(nextOne = -1) {
         this.player.material.color.set(0x805900);
 
-        var min = Infinity; var nextOne;
-        for (var i in this.players) {
-            var dist = this.players[i].mesh.position.distanceTo({ x: 0, y: 0, z: 0 });
-            if (dist < min && i != this._current) {
-                min = dist; nextOne = i;
+        if (nextOne < 0) {
+            var min = Infinity; var nextOne;
+            for (var i = 0; i < this.players.length; i++) {
+                var dist = this.players[i].mesh.position.distanceTo(ball.position);
+                if (dist < min && i != this._current) {
+                    min = dist; nextOne = i;
+                }
             }
         }
         this._current = nextOne;
@@ -115,4 +139,4 @@ class Team {
 }
 
 
-var cubes = new Team(2);
+var cubes = new Team(4);
