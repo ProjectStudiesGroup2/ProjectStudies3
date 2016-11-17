@@ -17,23 +17,11 @@
         <script src="libraries/OrbitControls.js" charset="utf-8"></script>
 
 
-        <script type="text/javascript">
-            Physijs.scripts.worker = 'libraries/physijs_worker.js';
-            Physijs.scripts.ammo = 'ammo.js';
-
-            var scene = new Physijs.Scene();
-
-            var renderer = new THREE.WebGLRenderer();
-            renderer.setClearColor(0xdddddd);
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMapSoft = true;
-            document.body.appendChild(renderer.domElement);
-        </script>
+        <script src="inits.js" charset="utf-8"></script>
 
         <script src="field.js" charset="utf-8"></script>
         <script src="light.js" charset="utf-8"></script>
-        <script src="cube.js" charset="utf-8"></script>
+        <script src="teams.js" charset="utf-8"></script>
         <script src="ball.js" charset="utf-8"></script>
         <script src="camera.js" charset="utf-8"></script>
 
