@@ -4,19 +4,15 @@ class Team {
 
         this._speed = 20;
 
-        this.players = {};
+        this.players = [];
         this._current = 0;
         this._pressed = {};
 
         for (var i = 0; i < nbPlayers; i++) {
-            this.players[i] = new Physijs.BoxMesh(
-                new THREE.BoxGeometry(1, 1, 1),
-                new THREE.MeshLambertMaterial({ color: 0x805900 }),
-                50
-            );
-            this.players[i].position.set(i * 2 - (nbPlayers - 1), 0, 0);
-            this.players[i].castShadow = true;
-            scene.add(this.players[i]);
+            this.players[i] = new Player(
+                { x: i * 2 - (nbPlayers - 1), y: 0, z: 0 },
+                this._speed
+            )
         }
 
         this.player.material.color.set(0xbf8600);
@@ -76,14 +72,14 @@ class Team {
     }
 
 
-    get player () { return this.players[this._current] }
+    get player () { return this.players[this._current].mesh }
 
     changePlayer() {
         this.player.material.color.set(0x805900);
 
         var min = Infinity; var nextOne;
         for (var i in this.players) {
-            var dist = this.players[i].position.distanceTo({ x: 0, y: 0, z: 0 });
+            var dist = this.players[i].mesh.position.distanceTo({ x: 0, y: 0, z: 0 });
             if (dist < min && i != this._current) {
                 min = dist; nextOne = i;
             }
@@ -113,9 +109,10 @@ class Team {
 
     get AIPlayers () {
         return this.players.filter(
-            index => { return !(index == this._current) }
+            (_, index) => { return !(index == this._current) }
         )
     }
 }
+
 
 var cubes = new Team(2);
