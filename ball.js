@@ -75,7 +75,6 @@ function kickBall() {
     ballMoving = true;
     collizionDet = false;
 }
-kickBall();
 
 document.addEventListener('keydown', function(event) {
     if (event.code == space && collizionDet == true ) {
