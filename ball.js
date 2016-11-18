@@ -64,21 +64,23 @@ var ballVertAngle = 0;
 var space = "Space";
 
 document.addEventListener('keydown', function(event) {
-    var ballLV = ball.getLinearVelocity();
+    function kickBall() {
+        var ballLV = ball.getLinearVelocity();
 
-    if (event.code == space && collizionDet == true ) {
-        ball.setLinearVelocity(
-            ballLV.add({
-                x: ballSpeed,
-                y: 5,
-                z: 0 })
-        );
-        ballMoving = true;
-        collizionDet = false;
+        if (event.code == space && collizionDet == true ) {
+            ball.setLinearVelocity(
+                ballLV.add({
+                    x: ballSpeed,
+                    y: 5,
+                    z: 0 })
+            );
+            ballMoving = true;
+            collizionDet = false;
+        }
+        return collizionDet;
     }
-    return collizionDet;
+    kickBall();
 });
-
 
 //     /*** Controls ***/
 // var ballMoving = false;
