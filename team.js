@@ -122,11 +122,27 @@ class Team {
             z: ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed) - lv.z
         }));
 
-        if (gamepad.buttons[0].pressed && !this._pressed["A"] && collizionDet == false ) {
+
+        if (gamepad.buttons[0].pressed && !this._pressed["A"] && collizionDet == false) {
             this._pressed["A"] = true;
-            this.changePlayer;
+            this.changePlayer();
         } else if (!gamepad.buttons[0].pressed && this._pressed["A"]) {
             this._pressed["A"] = false;
+        }
+        if (gamepad.buttons[1].pressed && !this._pressed["B"] && collizionDet == true) {
+            this._pressed["B"] = true;
+
+            var ballLV = ball.getLinearVelocity();
+            ball.setLinearVelocity(
+                ballLV.add({
+                    x: ballSpeed,
+                    y: 5,
+                    z: 0 })
+            );
+            ballMoving = true;
+            collizionDet = false;
+        } else if (!gamepad.buttons[1].pressed && this._pressed["B"]) {
+            this._pressed["B"] = false;
         }
     }
 
