@@ -130,16 +130,7 @@ class Team {
         }
         if (gamepad.buttons[1].pressed && !this._pressed["B"] && collizionDet == true) {
             this._pressed["B"] = true;
-
-            var ballLV = ball.getLinearVelocity();
-            ball.setLinearVelocity(
-                ballLV.add({
-                    x: ballSpeed,
-                    y: 5,
-                    z: 0 })
-            );
-            ballMoving = true;
-            collizionDet = false;
+            kickBall();
         } else if (!gamepad.buttons[1].pressed && this._pressed["B"]) {
             this._pressed["B"] = false;
         }

@@ -28,7 +28,7 @@ var ball = new Physijs.SphereMesh(
 );
 
 if (collizionDet == true) {
-    ball.position.set( cubes.player.position.x, cubes.player.position.y, cubes.player.position.z);
+    ball.position.set( cubes.player.position.x, ball.position.y, cubes.player.position.z);
 }
 else if (collizionDet == false) {
     ball.position.set(0, 5.5, -10);
@@ -63,22 +63,24 @@ var ballSpeed = 7;
 var ballVertAngle = 0;
 var space = "Space";
 
-document.addEventListener('keydown', function(event) {
+function kickBall() {
     var ballLV = ball.getLinearVelocity();
 
-    if (event.code == space && collizionDet == true ) {
-        ball.setLinearVelocity(
-            ballLV.add({
-                x: ballSpeed,
-                y: 5,
-                z: 0 })
-        );
-        ballMoving = true;
-        collizionDet = false;
-    }
-    return collizionDet;
-});
+    ball.setLinearVelocity(
+        ballLV.add({
+            x: ballSpeed,
+            y: 5,
+            z: 0 })
+    );
+    ballMoving = true;
+    collizionDet = false;
+}
 
+document.addEventListener('keydown', function(event) {
+    if (event.code == space && collizionDet == true ) {
+        kickBall();
+    }
+});
 
 //     /*** Controls ***/
 // var ballMoving = false;
