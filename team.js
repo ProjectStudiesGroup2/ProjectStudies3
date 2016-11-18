@@ -131,8 +131,7 @@ class Team {
         }
         if (gamepad.buttons[1].pressed && !this._pressed["B"] && collizionDet == true) {
             this._pressed["B"] = true;
-
-            function kickBall();
+            kickBall();
         } else if (!gamepad.buttons[1].pressed && this._pressed["B"]) {
             this._pressed["B"] = false;
         }
