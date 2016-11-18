@@ -5,6 +5,8 @@ textureGrass.wrapS = textureGrass.wrapT = THREE.RepeatWrapping;
 textureGrass.repeat.set(11, 11);
 
     //*** Field ***//
+var fieldWidth = 100, fieldHeight = 200;
+
 var field = new Physijs.BoxMesh(
   new THREE.PlaneGeometry(100, 200),
   new THREE.MeshLambertMaterial({ map: textureGrass }),
