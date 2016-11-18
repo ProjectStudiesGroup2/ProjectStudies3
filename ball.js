@@ -28,7 +28,7 @@ var ball = new Physijs.SphereMesh(
 );
 
 if (collizionDet == true) {
-    ball.position.set( cubes.player.position.x, cubes.player.position.y, cubes.player.position.z);
+    ball.position.set( cubes.player.position.x, ball.position.y, cubes.player.position.z);
 }
 else if (collizionDet == false) {
     ball.position.set(0, 5.5, -10);

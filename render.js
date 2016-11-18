@@ -9,7 +9,7 @@ var render = function() {
     detectCollision();    
     
     if (collizionDet == true) {
-        ball.position.set( cubes.player.position.x, cubes.player.position.y + 0.9, cubes.player.position.z - 2);        
+        ball.position.set( cubes.player.position.x, ball.position.y, cubes.player.position.z - 3);        
         ball.__dirtyPosition = true;
     }
 
