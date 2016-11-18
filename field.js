@@ -18,14 +18,14 @@ field.receiveShadow = true;
 scene.add(field);
 
     //*** Side Bumpers ***//
-// var sideGeometry = new THREE.PlaneGeometry(1, 1, 5);
-// var sideMaterial = new THREE.MeshLambertMaterial({ color: 0xfa3815})
-// var side = new Physijs.BoxMesh(sideGeometry, sideMaterial);
-//
-// side.position.set(0, 0, 0);
-// side.rotation.x = -0.6;
-// side.rotation.y = 2;
-// scene.add(side);
+var sideGeometry = new THREE.PlaneGeometry(200, 8, 0);
+var sideMaterial = new THREE.MeshLambertMaterial({ color: 0xfa3815})
+var side = new Physijs.BoxMesh(sideGeometry, sideMaterial);
+
+side.position.set(-57, -2, 0);
+sideGeometry.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / 2));
+sideGeometry.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / 5));
+scene.add(side);
 
     //*** Goal ***//
 var postGeometry = new THREE.CylinderGeometry(.5, .5, 10);
