@@ -64,6 +64,7 @@ var render = function() {
         ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
     }
 
+    console.log( (mouse.x * 100) / 30, ((mouse.y * 100) / 30)-0.8 );
 
     scene.simulate();
     renderer.render(scene, camera);

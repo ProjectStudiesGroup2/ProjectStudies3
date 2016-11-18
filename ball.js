@@ -22,7 +22,7 @@ textureBall.anisotropy = 3;     //lower value if the view is too laggy
 
     /*** Object ***/
 var ball = new Physijs.SphereMesh(
-    new THREE.SphereGeometry(1.3, 12, 12),
+    new THREE.SphereGeometry(1, 12, 12),
     new THREE.MeshLambertMaterial({ color: 0xffffff, map: textureBall}),
     20
 );
@@ -50,27 +50,45 @@ function detectCollision() {
 
             var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
             var collisionResults = ray.intersectObjects( collidableMeshList );
-            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
+            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.05 ) {
                 collizionDet = true;
             }
         }
 }
 
-// Kicking the ball
+/***** Directing the ball *****/ 
+console.log(ball.position);
+// Create a circle around the mouse and move it
+// The sphere has opacity 0
+var mouse = {x: 0, y: 0, z: 0};
+
+var cursorPosX = (mouse.x * 100) / 2 ;
+var cursorPosZ = ((mouse.y * 100) / 2)-14 ;
+
+function onMouseMove(event) {
+	// Update the mouse variable
+	event.preventDefault();
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = - (event.clientY / window.innerWidth) * 2 + 1;
+}
+document.addEventListener('mousemove', onMouseMove, false);
+
+/***** Kicking the ball *****/
 var ballMoving = false;
 var lastKeyUpAt = -1;
 var ballSpeed = 7;
 var ballVertAngle = 0;
 var space = "Space";
 
+
 function kickBall() {
     var ballLV = ball.getLinearVelocity();
 
     ball.setLinearVelocity(
         ballLV.add({
-            x: ballSpeed,
-            y: 5,
-            z: 0 })
+            x: (mouse.x * 100) / 10,
+            y: 2,
+            z: (((mouse.y * 100) / 10)-14) })
     );
     ballMoving = true;
     collizionDet = false;
@@ -80,7 +98,10 @@ document.addEventListener('keydown', function(event) {
     if (event.code == space && collizionDet == true ) {
         kickBall();
     }
+    console.log(ball.position);
 });
+
+
 
 //     /*** Controls ***/
 // var ballMoving = false;
