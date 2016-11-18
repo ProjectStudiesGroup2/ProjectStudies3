@@ -63,23 +63,23 @@ var ballSpeed = 7;
 var ballVertAngle = 0;
 var space = "Space";
 
-document.addEventListener('keydown', function(event) {
-    function kickBall() {
-        var ballLV = ball.getLinearVelocity();
+function kickBall() {
+    var ballLV = ball.getLinearVelocity();
 
-        if (event.code == space && collizionDet == true ) {
-            ball.setLinearVelocity(
-                ballLV.add({
-                    x: ballSpeed,
-                    y: 5,
-                    z: 0 })
-            );
-            ballMoving = true;
-            collizionDet = false;
-        }
-        return collizionDet;
+    ball.setLinearVelocity(
+        ballLV.add({
+            x: ballSpeed,
+            y: 5,
+            z: 0 })
+    );
+    ballMoving = true;
+    collizionDet = false;
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.code == space && collizionDet == true ) {
+        kickBall();
     }
-    kickBall();
 });
 
 //     /*** Controls ***/
