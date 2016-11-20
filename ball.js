@@ -33,8 +33,7 @@ if (collizionDet == true) {
 }
 else if (collizionDet == false) {
     ball.position.set(0, 5.5, -10);
-    ball.__dirtyPosition = true;    
-    cubes.player.rotation.y = 0;
+    ball.__dirtyPosition = true;  
 }
 
 ball.castShadow = true;
@@ -76,24 +75,40 @@ function onMouseMove(event) {
 document.addEventListener('mousemove', onMouseMove, false);
 
 /***** Kicking the ball *****/
-var ballMoving = false;
 var lastKeyUpAt = -1;
 var ballSpeed = 7;
 var ballVertAngle = 0;
 var space = "Space";
+var cubeRotate = false;
 
-
-function kickBall() {
+function setVelocity() {
     var ballLV = ball.getLinearVelocity();
-
     ball.setLinearVelocity(
         ballLV.add({
-            x: (mouse.x * 100) / 10,
+            x: ((mouse.x * 100) / 40) * 4 ,
             y: 2,
-            z: -(((mouse.y * 100) / 10)-14) })
+            z: -(((mouse.y * 100) / 40) - 1) * 4 })
     );
-    ballMoving = true;
     collizionDet = false;
+}
+
+function kickBall() {
+    if ( ((mouse.x * 100) / 10) >= 0 && (((mouse.y * 100) / 10) - 4) <= 0 ) {
+        cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), -90 );
+        cubeRotate = true;
+    }
+    else if ( ((mouse.x * 100) / 10) < 0 && (((mouse.y * 100) / 10) - 4) < 0 ) {
+        cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), 90 );
+        cubeRotate = true;
+    }
+
+    if (cubeRotate == true){
+        setTimeout( setVelocity, 200 );
+        setTimeout ( cubeRotate = false, 1000);
+    }
+    else {
+        setVelocity();
+    }
 }
 
 document.addEventListener('keydown', function(event) {
