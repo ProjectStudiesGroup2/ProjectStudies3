@@ -29,10 +29,12 @@ var ball = new Physijs.SphereMesh(
 
 if (collizionDet == true) {
     ball.position.set( cubes.player.position.x, ball.position.y, cubes.player.position.z);
+    ball.rotation.set = 0; 
 }
 else if (collizionDet == false) {
     ball.position.set(0, 5.5, -10);
-    ball.__dirtyPosition = true;
+    ball.__dirtyPosition = true;    
+    cubes.player.rotation.y = 0;
 }
 
 ball.castShadow = true;
@@ -50,7 +52,7 @@ function detectCollision() {
 
             var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
             var collisionResults = ray.intersectObjects( collidableMeshList );
-            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.05 ) {
+            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.08 ) {
                 collizionDet = true;
             }
         }
@@ -88,7 +90,7 @@ function kickBall() {
         ballLV.add({
             x: (mouse.x * 100) / 10,
             y: 2,
-            z: (((mouse.y * 100) / 10)-14) })
+            z: -(((mouse.y * 100) / 10)-14) })
     );
     ballMoving = true;
     collizionDet = false;

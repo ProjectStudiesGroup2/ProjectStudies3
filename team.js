@@ -2,7 +2,7 @@ class Team {
 
     constructor(nbPlayers) {
 
-        this._speed = 20;
+        this._speed = 30;
 
         this.players = [];
         this._current = 0;
