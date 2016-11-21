@@ -6,6 +6,7 @@ class Team {
         this.players = [];
         this._current = 0;
         this._pressed = {};
+        this.playerRotation = 0;
 
         for (var i = 0; i < nbPlayers; i++) {
             switch (i) {
@@ -92,9 +93,7 @@ class Team {
         }, false);
 
 
-        var projector = new THREE.Projector(),
-            mouse_vector = new THREE.Vector3(),
-            mouse = { x: 0, y: 0, z: 1 },
+        var mouse = new THREE.Vector3(),
             ray = new THREE.Raycaster( new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,0) ),
             intersects = [];
 
@@ -107,11 +106,13 @@ class Team {
         scene.add(plane);
 
         document.addEventListener('mousemove', event => {
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-            mouse_vector.set(mouse.x, mouse.y, mouse.z);
-            projector.unprojectVector(mouse_vector, camera);
-            var direction = mouse_vector.sub(camera.position).normalize();
+            mouse.set(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                -(event.clientY / window.innerHeight) * 2 + 1,
+                1
+            );
+            mouse.unproject(camera);
+            var direction = mouse.sub(camera.position).normalize();
             ray.set(camera.position, direction);
             intersects = ray.intersectObject(plane);
 
@@ -146,6 +147,8 @@ class Team {
 
 
     rotatePlayer(y, x) {
+        this.playerRotation = Math.atan2(y, x);
+        console.log(this.playerRotation);
         this.player.rotation.set(0, Math.atan2(y, x), 0);
         this.player.__dirtyRotation = true;
     }
