@@ -13,10 +13,11 @@ var render = function() {
         cubes.AIPlayers[i].useAI();
     }
 
+
     detectCollision();
 
     if (collizionDet == true) {
-        ball.position.set( cubes.player.position.x, cubes.player.position.y + 0.9, cubes.player.position.z - 2);        
+        ball.position.set( cubes.player.position.x, cubes.player.position.y + 0.9, cubes.player.position.z - 2);
         ball.__dirtyPosition = true;
         ball.rotation.x = 0;
         ball.rotation.y = 0;
@@ -29,7 +30,7 @@ var render = function() {
             y: 0,
             z: 0 })
         );
-    }    
+    }
 
 
       //*** ball reset ***//
@@ -74,7 +75,6 @@ var render = function() {
         ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
     }
 
-    console.log( (mouse.x * 100) / 40, ((mouse.y * 100) / 40) - 1 );
 
     scene.simulate();
     renderer.render(scene, camera);
