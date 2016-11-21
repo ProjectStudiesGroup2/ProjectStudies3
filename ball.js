@@ -40,6 +40,7 @@ ball.castShadow = true;
 scene.add(ball);
 collidableMeshList.push(ball);
 
+
 // Detecting collizion between cube and a ball function
 function detectCollision() {
     var originPoint = cubes.player.position.clone();
@@ -57,220 +58,69 @@ function detectCollision() {
         }
 }
 
-/***** Directing the ball *****/ 
-console.log(ball.position);
-// Create a circle around the mouse and move it
-// The sphere has opacity 0
-var mouse = {x: 0, y: 0, z: 0};
 
-var cursorPosX = (mouse.x * 100) / 2 ;
-var cursorPosZ = ((mouse.y * 100) / 2)-14 ;
-
-function onMouseMove(event) {
-	// Update the mouse variable
-	event.preventDefault();
-	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-	mouse.y = - (event.clientY / window.innerWidth) * 2 + 1;
-}
-document.addEventListener('mousemove', onMouseMove, false);
-
-/***** Kicking the ball *****/
-var lastKeyUpAt = -1;
-var ballSpeed = 7;
-var ballVertAngle = 0;
-var space = "Space";
-var cubeRotate = false;
-
-function setVelocity() {
-    var ballLV = ball.getLinearVelocity();
-    ball.setLinearVelocity(
-        ballLV.add({
-            x: ((mouse.x * 100) / 40) * 4 ,
-            y: 2,
-            z: -(((mouse.y * 100) / 40) - 1) * 4 })
+/***** Directing and kicking the ball *****/
+function kickBall(strength) {
+    var lv = ball.getLinearVelocity();
+    var angle = cubes.playerRotation;
+    var kick = new THREE.Vector3(
+        strength * -Math.sin(angle),
+        2,
+        strength * -Math.cos(angle)
     );
-    collizionDet = false;
+    ball.setLinearVelocity(lv.add(kick));
+    collizionDet = false
 }
 
-function kickBall() {
-    if ( ((mouse.x * 100) / 10) >= 0 && (((mouse.y * 100) / 10) - 4) <= 0 ) {
-        cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), -90 );
-        cubeRotate = true;
+document.addEventListener('keydown', event => {
+    if (event.code == "Space" && collizionDet == true ) {
+        kickBall(50);
     }
-    else if ( ((mouse.x * 100) / 10) < 0 && (((mouse.y * 100) / 10) - 4) < 0 ) {
-        cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), 90 );
-        cubeRotate = true;
-    }
-
-    if (cubeRotate == true){
-        setTimeout( setVelocity, 200 );
-        setTimeout ( cubeRotate = false, 1000);
-    }
-    else {
-        setVelocity();
-    }
-}
-
-document.addEventListener('keydown', function(event) {
-    if (event.code == space && collizionDet == true ) {
-        kickBall();
-    }
-    console.log(ball.position);
 });
 
-
-
-//     /*** Controls ***/
-// var ballMoving = false;
-//
+// /***** Kicking the ball *****/
 // var lastKeyUpAt = -1;
-// var ballSpeed = 0;
+// var ballSpeed = 7;
 // var ballVertAngle = 0;
-// var space = " ";
-//
-// var scale = true;
-//
-// document.addEventListener('keydown', function(event) {
+// var space = "Space";
+// var cubeRotate = false;
+
+// function setVelocity() {
 //     var ballLV = ball.getLinearVelocity();
-//     $('#scale').height() == 600;
-//
-//     if (event.key == space) {
-//         setTimeout(function() {
-//                 if (scale){
-//                 $( "#scaleAppend" ).empty();
-//                 $( "#boxAppend" ).empty();
-//                 $( "#scaleAppend" ).delay(1170).append('<div id="scale" class="box"></div>');
-//                 $( "#boxAppend" ).delay(1170).append('<div class="box2"></div>');
-//                 scale = false;
-//                 };
-//         }, 100);
-//         lastKeyUpAt ++;
-//         if (lastKeyUpAt >= 20) {
-//             lastKeyUpAt = -1;
-//             return lastKeyUpAt;
-//         }
-//         ballBlocked = false;
-//
-//         ballLV = ball.getLinearVelocity();
-//         setTimeout(function() {
-//             if ($('#scale').height() == 600){
-//                 $('#scale').animate({ height: 1 }, 300);
-//             }
-//             else if ($('#scale').height() == 1){
-//                 $('#scale').animate({ height: 600 }, 300);
-//             }
-//         });
-//         goalT = false;
-//         return goalT;
+//     ball.setLinearVelocity(
+//         ballLV.add({
+//             x: ((mouse.x * 100) / 40) * 4 ,
+//             y: 2,
+//             z: -(((mouse.y * 100) / 40) - 1) * 4 })
+//     );
+//     collizionDet = false;
+// }
+
+// function kickBall() {
+//     if ( ((mouse.x * 100) / 10) >= 0 && (((mouse.y * 100) / 10) - 4) <= 0 ) {
+//         cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), -90 );
+//         cubeRotate = true;
 //     }
-//     else if (!ballMoving || event.key == "w" || event.key == "ц") {
-//         switch (event.key) {
-//             case "w":
-//                 var dist = camera.position.distanceTo(arrow.position);
-//                 ball.setLinearVelocity(
-//                     ballLV.add({
-//                         x: -((camera.position.x - arrow.position.x) / dist) * ballSpeed,
-//                         y: (-((camera.position.y - arrow.position.y) / dist) + 0.35) * ballSpeed,
-//                         z: -((camera.position.z - arrow.position.z) / dist) * ballSpeed })
-//                 );
-//                 sendBall();
-//                 ballMoving = true;
-//                 break;
-//         }
-//         ballSpeed = 0;
-//         ballVertAngle = 0;
+//     else if ( ((mouse.x * 100) / 10) < 0 && (((mouse.y * 100) / 10) - 4) < 0 ) {
+//         cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), 90 );
+//         cubeRotate = true;
 //     }
-//     console.log( "lastKeyUpAt = " + lastKeyUpAt );
-//     return ballSpeed, ballVertAngle, goalT;
-// }, false);
-//
-// document.addEventListener('keyup', function(event) {
-//     if (event.key == space) {
-//         var ballLV = ball.getLinearVelocity()
-//
-//         if (lastKeyUpAt >= 20) {
-//             ballSpeed = 5;
-//         }
-//         else if (lastKeyUpAt >= 19) {
-//             ballSpeed = 10;
-//             ballVertAngle = 2;
-//         }
-//         else if (lastKeyUpAt >= 18) {
-//             ballSpeed = 15;
-//             ballVertAngle = 3;
-//         }
-//         else if (lastKeyUpAt >= 17) {
-//             ballSpeed = 30;
-//             ballVertAngle = 4;
-//         }
-//         else if (lastKeyUpAt >= 15) {
-//             ballSpeed = 40;
-//             ballVertAngle = 5;
-//         }
-//         else if (lastKeyUpAt >= 14) {
-//             ballSpeed = 50;
-//             ballVertAngle = 5;
-//         }
-//         else if (lastKeyUpAt >= 12) {
-//             ballSpeed = 70;
-//             ballVertAngle = 6;
-//         }
-//         else if (lastKeyUpAt >= 9) {
-//             ballSpeed = 90;
-//             ballVertAngle = 8;
-//         }
-//         else if (lastKeyUpAt >= 7) {
-//             ballSpeed = 70;
-//             ballVertAngle = 6;
-//         }
-//         else if (lastKeyUpAt >= 6) {
-//             ballSpeed = 50;
-//             ballVertAngle = 5;
-//         }
-//         else if (lastKeyUpAt >= 5) {
-//             ballSpeed = 40;
-//             ballVertAngle = 4;
-//         }
-//         else if (lastKeyUpAt >= 4) {
-//             ballSpeed = 30;
-//             ballVertAngle = 4;
-//         }
-//         else if (lastKeyUpAt >= 3) {
-//             ballSpeed = 15;
-//             ballVertAngle = 3;
-//         }
-//         else if (lastKeyUpAt >= 1) {
-//             ballSpeed = 10;
-//             ballVertAngle = 2;
-//         }
-//         else if (lastKeyUpAt >= 0) {
-//             ballSpeed = 5;
-//         }
-//
-//         switch (event.key) {
-//             case space:
-//                 lastKeyUpAt = 0;
-//                 console.log( "Ball speed = " + ballSpeed + "; VertAngle = " + ballVertAngle );
-//                 $( "#kickStr" ).empty();
-//                 $( "#kickStr" ).append( ballSpeed );
-//                 ballMoving = false;
-//                 break;
-//         }
-//         $( "#scale" ).stop();
-//         return ballSpeed, ballVertAngle;
+
+//     if (cubeRotate == true){
+//         setTimeout( setVelocity, 200 );
+//         setTimeout ( cubeRotate = false, 1000);
 //     }
-//
-//     if ( !ballMoving || event.key == "w" || event.key == "ц") {
-//         var ballLV = ball.getLinearVelocity();
-//         ball.setLinearVelocity(
-//         ballLV.add({ z: -ballLV.x, x: 0, y: ballVertAngle })
-//         );
-//         sendBall();
-//         ballSpeed = 0;
-//         ballVertAngle = 0;
-//         ballMoving = true;
+//     else {
+//         setVelocity();
 //     }
-//
-// }, false);
-//
-// var ballBlocked = false;
+// }
+
+// document.addEventListener('keydown', function(event) {
+//     if (event.code == space && collizionDet == true ) {
+//         kickBall();
+//     }
+//     console.log(ball.position);
+// });
+
+
+
