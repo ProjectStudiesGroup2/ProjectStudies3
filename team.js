@@ -148,7 +148,6 @@ class Team {
 
     rotatePlayer(y, x) {
         this.playerRotation = Math.atan2(y, x);
-        console.log(this.playerRotation);
         this.player.rotation.set(0, Math.atan2(y, x), 0);
         this.player.__dirtyRotation = true;
     }
