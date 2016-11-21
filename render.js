@@ -75,7 +75,6 @@ var render = function() {
         ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
     }
 
-
     scene.simulate();
     renderer.render(scene, camera);
 };
