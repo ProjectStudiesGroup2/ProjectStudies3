@@ -119,7 +119,6 @@ function kickBall(strength) {
         2,
         strength * -Math.cos(angle)
     );
-    console.log(angle, Math.sin(angle), Math.cos(angle));
     ball.setLinearVelocity(lv.add(kick));
     collizionDet = false
 }
