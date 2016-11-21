@@ -20,16 +20,16 @@ scene.add(field);
     //*** Side Bumpers ***//
 var sideGeometryL = new THREE.PlaneGeometry(200, 8, 0);
 var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0xfa3815})
-var sideL = new Physijs.BoxMesh(sideGeometryL, sideMaterialL);
+var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 var sideGeometryR = new THREE.PlaneGeometry(200, 8, 0);
 var sideMaterialR = new THREE.MeshLambertMaterial({ color: 0xfa3815})
-var sideR = new Physijs.BoxMesh(sideGeometryR, sideMaterialR);
+var sideR = new Physijs.Mesh(sideGeometryR, sideMaterialR);
 var sideGeometryTop = new THREE.PlaneGeometry(100, 8, 0);
 var sideMaterialTop = new THREE.MeshLambertMaterial({ color: 0xfa3815})
-var sideTop = new Physijs.BoxMesh(sideGeometryTop, sideMaterialTop);
+var sideTop = new Physijs.Mesh(sideGeometryTop, sideMaterialTop);
 var sideGeometryBot = new THREE.PlaneGeometry(100, 8, 0);
 var sideMaterialBot = new THREE.MeshLambertMaterial({ color: 0xfa3815})
-var sideBot = new Physijs.BoxMesh(sideGeometryBot, sideMaterialBot);
+var sideBot = new Physijs.Mesh(sideGeometryBot, sideMaterialBot);
 
 sideL.position.set(-57, -2, 0);
 sideGeometryL.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / 2));
@@ -37,10 +37,10 @@ sideGeometryL.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / 5));
 sideR.position.set(57, -2, 0);
 sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / -2));
 sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / -5));
-sideTop.position.set(0, -2, -100);
+sideTop.position.set(0, -2, -107);
 sideGeometryTop.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / -5));
-sideBot.position.set(0, -2, 100);
-sideGeometryBot.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI * 5));
+sideBot.position.set(0, -2, 107);
+sideGeometryBot.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI * 7));
 scene.add(sideL);
 scene.add(sideR);
 scene.add(sideTop);
