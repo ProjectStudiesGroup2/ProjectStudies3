@@ -2,6 +2,9 @@ var render = function() {
     requestAnimationFrame(render);
 
 
+    camera.lookAt(cubes.player.position);
+
+
     if (gamepads[0]) {
         cubes.useGamepad(gamepads[0]);
     }
@@ -16,6 +19,17 @@ var render = function() {
     if (collizionDet == true) {
         ball.position.set( cubes.player.position.x, cubes.player.position.y + 0.9, cubes.player.position.z - 2);
         ball.__dirtyPosition = true;
+        ball.rotation.x = 0;
+        ball.rotation.y = 0;
+        ball.rotation.z = 0;
+        ball.__dirtyRotation = true;
+        var ballLV = ball.getLinearVelocity();
+        ball.setLinearVelocity(
+        ballLV.add({
+            x: 0,
+            y: 0,
+            z: 0 })
+        );
     }
 
 
