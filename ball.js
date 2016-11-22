@@ -28,7 +28,7 @@ var ball = new Physijs.SphereMesh(
 );
 
 if (collizionDet == true) {
-    ball.position.set( cubes.player.position.x, ball.position.y, cubes.player.position.z);
+    ball.position.set( team1.player.position.x, ball.position.y, team1.player.position.z);
     ball.rotation.set = 0;
 }
 else if (collizionDet == false) {
@@ -42,12 +42,12 @@ collidableMeshList.push(ball);
 
 // Detecting collizion between cube and a ball function
 function detectCollision() {
-    var originPoint = cubes.player.position.clone();
-    for (var vertexIndex = 0; vertexIndex < cubes.player.geometry.vertices.length; vertexIndex++ )
+    var originPoint = team1.player.position.clone();
+    for (var vertexIndex = 0; vertexIndex < team1.player.geometry.vertices.length; vertexIndex++ )
         {
-            var localVertex = cubes.player.geometry.vertices[vertexIndex].clone();
-            var globalVertex = localVertex.applyMatrix4( cubes.player.matrix );
-            var directionVector = globalVertex.sub( cubes.player.position );
+            var localVertex = team1.player.geometry.vertices[vertexIndex].clone();
+            var globalVertex = localVertex.applyMatrix4( team1.player.matrix );
+            var directionVector = globalVertex.sub( team1.player.position );
 
             var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
             var collisionResults = ray.intersectObjects( collidableMeshList );
@@ -94,11 +94,11 @@ function detectCollision() {
 //
 // function kickBall() {
 //     if ( ((mouse.x * 100) / 10) >= 0 && (((mouse.y * 100) / 10) - 4) <= 0 ) {
-//         cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), -90 );
+//         team1.player.rotateOnAxis( new THREE.Vector3(0,1,0), -90 );
 //         cubeRotate = true;
 //     }
 //     else if ( ((mouse.x * 100) / 10) < 0 && (((mouse.y * 100) / 10) - 4) < 0 ) {
-//         cubes.player.rotateOnAxis( new THREE.Vector3(0,1,0), 90 );
+//         team1.player.rotateOnAxis( new THREE.Vector3(0,1,0), 90 );
 //         cubeRotate = true;
 //     }
 //
@@ -113,7 +113,7 @@ function detectCollision() {
 
 function kickBall(strength) {
     var lv = ball.getLinearVelocity();
-    var angle = cubes.playerRotation;
+    var angle = team1.playerRotation;
     var kick = new THREE.Vector3(
         strength * -Math.sin(angle),
         2,
