@@ -1,8 +1,8 @@
     //*** Texture ***//
-var textureGrass = textureLoader.load("textures/grass.jpg");
+var textureGrass = textureLoader.load("textures/field.jpg");
 textureGrass.anisotropy = 3;
-textureGrass.wrapS = textureGrass.wrapT = THREE.RepeatWrapping;
-textureGrass.repeat.set(11, 11);
+// textureGrass.wrapS = textureGrass.wrapT = THREE.RepeatWrapping;
+// textureGrass.repeat.set(11, 11);
 
     //*** Field ***//
 var fieldWidth = 100, fieldHeight = 200;
@@ -17,6 +17,7 @@ field.rotation.x = -.5 * Math.PI;
 field.receiveShadow = true;
 scene.add(field);
 
+    
     //*** Side Bumpers ***//
 var sideGeometryL = new THREE.PlaneGeometry(200, 8, 0);
 var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0xfa3815})
