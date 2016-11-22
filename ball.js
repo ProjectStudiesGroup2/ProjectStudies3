@@ -1,8 +1,8 @@
-                /************\
+                 /************\
                 |*   Ball   *|
-                \************/                
+                \************/
+var collisionDet2 = false;                
 var collisionDet = false;
-var collisionDet2 = false;
 var collidableMeshList = [];
 
 var textureLoader = new THREE.TextureLoader();
@@ -28,22 +28,7 @@ collidableMeshList.push(ball);
 
 
 // Detecting collizion between cube and a ball function
-function detectCollision() {    
-    var originPoint = team1.player.position.clone();
-    for (var vertexIndex = 0; vertexIndex < team1.player.geometry.vertices.length; vertexIndex++ )
-        {
-            var localVertex = team1.player.geometry.vertices[vertexIndex].clone();
-            var globalVertex = localVertex.applyMatrix4( team1.player.matrix );
-            var directionVector = globalVertex.sub( team1.player.position );
-
-            var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
-            var collisionResults = ray.intersectObjects( collidableMeshList );
-            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.08 ) {
-                collisionDet = true;
-                collisionDet2 = false;
-            }
-        } 
-
+function detectCollision() {
     var originPoint2 = team2.player.position.clone();
     for (var vertexIndex = 0; vertexIndex < team2.player.geometry.vertices.length; vertexIndex++ )
         {
@@ -58,9 +43,25 @@ function detectCollision() {
                 collisionDet = false;
             }
         }
+            
+    var originPoint = team1.player.position.clone();
+    for (var vertexIndex = 0; vertexIndex < team1.player.geometry.vertices.length; vertexIndex++ )
+        {
+            var localVertex = team1.player.geometry.vertices[vertexIndex].clone();
+            var globalVertex = localVertex.applyMatrix4( team1.player.matrix );
+            var directionVector = globalVertex.sub( team1.player.position );
+
+            var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
+            var collisionResults = ray.intersectObjects( collidableMeshList );
+            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.08 ) {
+                collisionDet = true;
+                collisionDet2 = false;
+            }
+        } 
 }
 
 
+    /***** Directing and kicking the ball *****/
 function kickBall(strength) {
     var lv = ball.getLinearVelocity();
     var angle = team1.playerRotation;
@@ -85,10 +86,36 @@ function kickBall(strength) {
     collisionDet2 = false;
 }
 
+var strengthTimer = 0;
 document.addEventListener('keydown', event => {
     if (event.code == "Space" && collisionDet == true || event.code == "Space" && collisionDet2 == true) {
-        kickBall(20);
+        strengthTimer ++;
+        console.log(strengthTimer)
     }
+});
+
+document.addEventListener('keyup', event => {
+    if (event.code == "Space" && collisionDet == true && strengthTimer <= 3 ||
+        event.code == "Space" && collisionDet2 == true && strengthTimer <= 3 ) {
+        kickBall(10);
+    }  
+    else if (event.code == "Space" && collisionDet == true && strengthTimer <= 7 ||
+        event.code == "Space" && collisionDet2 == true && strengthTimer <= 7 ) {
+        kickBall(25);
+    }  
+    else if (event.code == "Space" && collisionDet == true && strengthTimer <= 11 ||
+             event.code == "Space" && collisionDet2 == true && strengthTimer <= 11) {
+        kickBall(35);
+    }  
+    else if (event.code == "Space" && collisionDet == true && strengthTimer <= 14 ||
+             event.code == "Space" && collisionDet2 == true && strengthTimer <= 14) {
+        kickBall(50);
+    }  
+    else if (event.code == "Space" && collisionDet == true && strengthTimer > 14 ||
+             event.code == "Space" && collisionDet2 == true && strengthTimer > 14) {
+        kickBall(62);
+    }  
+    strengthTimer = 0;    
 });
 
 function setBallToPlayer() {

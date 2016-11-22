@@ -13,11 +13,6 @@ var render = function() {
         camera.position.z = ball.position.z;
         camera.lookAt(ball.position); 
     }
-    // var relativeCameraOffset = new THREE.Vector3(100, 75, 0);
-    // var cameraOffset = relativeCameraOffset.applyMatrix4( ball.matrixWorld );
-    // camera.position.z = cameraOffset.z;
-    // camera.lookAt( team1.player.position );
-
 
 
     if (gamepads[0]) {
@@ -36,7 +31,6 @@ var render = function() {
 
 
     detectCollision();
-
     if (collisionDet == true) {
         collisionDet2 = false;
         ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
@@ -45,13 +39,8 @@ var render = function() {
     else if (collisionDet2 == true) {
         collisionDet = false;
         ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
-        setBallToPlayer();        
+        setBallToPlayer(); 
     }
-
-    if (team2.player.position.z == team1.player.position.z - 2) {
-        collisionDet2 == true;
-    }
-
 
       //*** Ball reset ***//
     if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
