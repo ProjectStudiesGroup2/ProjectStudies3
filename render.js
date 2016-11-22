@@ -42,6 +42,7 @@ var render = function() {
         setBallToPlayer(); 
     }
 
+
       //*** Ball reset ***//
     if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
         || ball.position.z <= -fieldHeight/2 || ball.position.z >= fieldHeight/2) {
