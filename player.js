@@ -35,7 +35,7 @@ class Player {
     useAI() {
         var ballPos = ball.position;
 
-        if (ballPos.z > 0 && this.side > 0 || ballPos.z < 0 && this.side < 0) {
+        if (ballPos.z >= 0 && this.side > 0 || ballPos.z <= 0 && this.side < 0) {
             this.goTo({
                 x: ballPos.x * this.coverage + this.startingPoint.x * (1 - this.coverage),
                 z: ballPos.z * this.coverage + this.startingPoint.z * (1 - this.coverage),
