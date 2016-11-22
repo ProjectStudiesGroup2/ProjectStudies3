@@ -1,78 +1,51 @@
 var render = function() {
     requestAnimationFrame(render);
-
-
-    camera.lookAt(cubes.player.position);
+    
+    if (collisionDet == true) {
+        camera.position.z = team1.player.position.z;
+        camera.lookAt(team1.player.position);        
+    }
+    else if (collisionDet2 == true) {
+        camera.position.z = team2.player.position.z;
+        camera.lookAt(team2.player.position);
+    }
+    else { 
+        camera.position.z = ball.position.z;
+        camera.lookAt(ball.position); 
+    }
 
 
     if (gamepads[0]) {
-        cubes.useGamepad(gamepads[0]);
+        team1.useGamepad(gamepads[0]);
+    }
+    if (gamepads[1]) {
+        team2.useGamepad(gamepads[1]);
     }
 
-    for (var i in cubes.AIPlayers) {
-        cubes.AIPlayers[i].useAI();
+    for (var i in team1.AIPlayers) {
+        team1.AIPlayers[i].useAI();
+    }
+    for (var i in team2.AIPlayers) {
+        team2.AIPlayers[i].useAI();
     }
 
 
     detectCollision();
-
-    if (collizionDet == true) {
-        ball.position.set( cubes.player.position.x, cubes.player.position.y + 0.9,  cubes.player.position.z - 2 ); /* cubes.player.position.z - 2 */
-        ball.__dirtyPosition = true;
-        ball.rotation.x = 0;
-        ball.rotation.y = 0;
-        ball.rotation.z = 0;
-        ball.__dirtyRotation = true;
-        var ballLV = ball.getLinearVelocity();
-        ball.setLinearVelocity(
-        ballLV.add({
-            x: 0,
-            y: 0,
-            z: 0 })
-        );
+    if (collisionDet == true) {
+        collisionDet2 = false;
+        ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
+        setBallToPlayer();
+    } 
+    else if (collisionDet2 == true) {
+        collisionDet = false;
+        ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
+        setBallToPlayer(); 
     }
 
-
-      //*** ball reset ***//
-    if (ball.position.x <= -fieldWidth/2) {
-        ballMoving = true;
-        collizionDet = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
-    }
-    else if (ball.position.x >= fieldWidth/2){
-        ballMoving = true;
-        collizionDet = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
-    }
-    if (ball.position.z <= -fieldHeight/2){
-        ballMoving = true;
-        collizionDet = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
-    }
-    else if (ball.position.z >= fieldHeight/2){
-        ballMoving = true;
-        collizionDet = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
+      //*** Ball reset ***//
+    if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
+        || ball.position.z <= -fieldHeight/2 || ball.position.z >= fieldHeight/2) {
+        resetBall();
     }
 
     scene.simulate();
