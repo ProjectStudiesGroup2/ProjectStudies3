@@ -20,16 +20,16 @@ scene.add(field);
     
     //*** Side Bumpers ***//
 var sideGeometryL = new THREE.PlaneGeometry(200, 8, 0);
-var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0xfa3815})
+var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0x197A22}) /* 0xfa3815 */
 var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 var sideGeometryR = new THREE.PlaneGeometry(200, 8, 0);
-var sideMaterialR = new THREE.MeshLambertMaterial({ color: 0xfa3815})
+var sideMaterialR = new THREE.MeshLambertMaterial({ color: 0x197A22})
 var sideR = new Physijs.Mesh(sideGeometryR, sideMaterialR);
 var sideGeometryTop = new THREE.PlaneGeometry(100, 8, 0);
-var sideMaterialTop = new THREE.MeshLambertMaterial({ color: 0xfa3815})
+var sideMaterialTop = new THREE.MeshLambertMaterial({ color: 0x197A22})
 var sideTop = new Physijs.Mesh(sideGeometryTop, sideMaterialTop);
 var sideGeometryBot = new THREE.PlaneGeometry(100, 8, 0);
-var sideMaterialBot = new THREE.MeshLambertMaterial({ color: 0xfa3815})
+var sideMaterialBot = new THREE.MeshLambertMaterial({ color: 0x197A22})
 var sideBot = new Physijs.Mesh(sideGeometryBot, sideMaterialBot);
 
 sideL.position.set(-57, -2, 0);
