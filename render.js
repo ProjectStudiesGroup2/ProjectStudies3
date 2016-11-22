@@ -38,85 +38,26 @@ var render = function() {
     detectCollision();
 
     if (collisionDet == true) {
+        collisionDet2 = false;
         ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
-        ball.__dirtyPosition = true;
-        ball.rotation.x = 0;
-        ball.rotation.y = 0;
-        ball.rotation.z = 0;
-        ball.__dirtyRotation = true;
-        var ballLV = ball.getLinearVelocity();
-        ball.setLinearVelocity(
-        ballLV.add({
-            x: 0,
-            y: 0,
-            z: 0 })
-        );
-        collisionDet2 = false;
-    }    
+        setBallToPlayer();
+    } 
     else if (collisionDet2 == true) {
+        collisionDet = false;
         ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
-        ball.__dirtyPosition = true;
-        ball.rotation.x = 0;
-        ball.rotation.y = 0;
-        ball.rotation.z = 0;
-        ball.__dirtyRotation = true;
-        var ballLV = ball.getLinearVelocity();
-        ball.setLinearVelocity(
-        ballLV.add({
-            x: 0,
-            y: 0,
-            z: 0 })
-        );
-        collisionDet = false;
+        setBallToPlayer();        
+    }
+
+    if (team2.player.position.z == team1.player.position.z - 2) {
+        collisionDet2 == true;
     }
 
 
-      //*** ball reset ***//
-    if (ball.position.x <= -fieldWidth/2) {
-        ballMoving = true;
-        collisionDet = false;
-        collisionDet2 = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
+      //*** Ball reset ***//
+    if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
+        || ball.position.z <= -fieldHeight/2 || ball.position.z >= fieldHeight/2) {
+        resetBall();
     }
-    else if (ball.position.x >= fieldWidth/2){
-        ballMoving = true;
-        collisionDet = false;
-        collisionDet2 = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
-    }
-    if (ball.position.z <= -fieldHeight/2){
-        ballMoving = true;
-        collisionDet = false;
-        collisionDet2 = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
-    }
-    else if (ball.position.z >= fieldHeight/2){
-        ballMoving = true;
-        collisionDet = false;
-        collisionDet2 = false;
-        ball.position.set(0, 4, 0);
-        ball.__dirtyPosition = true;
-        ball.rotation.set(0, 0, 0);
-        ball.__dirtyRotation = true;
-        ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-        ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
-    }
-
 
     scene.simulate();
     renderer.render(scene, camera);
