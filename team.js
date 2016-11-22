@@ -1,76 +1,82 @@
 class Team {
 
-    constructor(nbPlayers) {
+    constructor(controls, colors, side) {
 
         this._speed = 30;
         this.players = [];
         this._current = 0;
         this._pressed = {};
         this.playerRotation = 0;
+        this._colors = colors;
 
-        for (var i = 0; i < nbPlayers; i++) {
+        for (var i = 0; i < 4; i++) {
             switch (i) {
                 case 0:
                     this.players[i] = new Player(
-                        { x: -50/3, y: -4, z: -85/3 },
-                        this._speed
+                        { x: -(fieldWidth / 2) / 3, y: -4, z: ((fieldHeight / 2) / 3) * side },
+                        this._speed,
+                        this._colors[0],
+                        side
                     )
                     break;
                 case 1:
                     this.players[i] = new Player(
-                        { x: 50/3, y: -4, z: -85/3 },
-                        this._speed
+                        { x: (fieldWidth / 2) / 3, y: -4, z: ((fieldHeight / 2) / 3) * side },
+                        this._speed,
+                        this._colors[0],
+                        side
                     )
                     break;
                 case 2:
                     this.players[i] = new Player(
-                        { x: -50/3, y: -4, z: 85/3 },
-                        this._speed
+                        { x: -(fieldWidth / 2) / 3, y: -4, z: (2 * (fieldHeight / 2) / 3) * side },
+                        this._speed,
+                        this._colors[0],
+                        side
                     )
                     break;
                 case 3:
                     this.players[i] = new Player(
-                        { x: 50/3, y: -4, z: 85/3 },
-                        this._speed
+                        { x: (fieldWidth / 2) / 3, y: -4, z: (2 * (fieldHeight / 2) / 3) * side },
+                        this._speed,
+                        this._colors[0],
+                        side
                     )
                     break;
             }
         }
 
-        this.player.material.color.set(0xbf8600);
+        this.player.material.color.set(this._colors[1]);
 
 
         document.addEventListener('keydown', event => {
-            if (event.code == "KeyE" && collizionDet == false ) {
+            if (event.code == controls.swap && collizionDet == false ) {
                 this.changePlayer();
             }
 
             var lv = this.player.getLinearVelocity();
 
-            if (!this._pressed[event.code]) {
-                switch (event.code) {
-                    case "KeyW":
-                        this.player.setLinearVelocity(
-                            lv.add({ x: 0, y: 0, z: -this._speed })
-                        );
-                        break;
-                    case "KeyA":
-                        this.player.setLinearVelocity(
-                            lv.add({ x: -this._speed, y: 0, z: 0 })
-                        );
-                        break;
-                    case "KeyS":
-                        this.player.setLinearVelocity(
-                            lv.add({ x: 0, y: 0, z: this._speed })
-                        );
-                        break;
-                    case "KeyD":
-                        this.player.setLinearVelocity(
-                            lv.add({ x: this._speed, y: 0, z: 0 })
-                        );
-                        break;
-                }
-                this._pressed[event.code] = true;
+            switch (event.code) {
+                case controls.forward:
+                    this.player.setLinearVelocity({
+                        x: lv.x, y: lv.y, z: -this._speed
+                    });
+                    break;
+                case controls.left:
+                    this.player.setLinearVelocity({
+                        x: -this._speed, y: lv.y, z: lv.z
+                    });
+                    break;
+                case controls.backward:
+                    this.player.setLinearVelocity({
+                        x: lv.x, y: lv.y, z: this._speed
+                    });
+                    break;
+                case controls.right:
+                    this.player.setLinearVelocity({
+                        x: this._speed, y: lv.y, z: lv.z
+                    });
+                    break;
             }
         }, false);
 
@@ -79,12 +85,12 @@ class Team {
 
             this._pressed[event.code] = false;
             switch (event.code) {
-                case "KeyW": case "KeyS":
+                case controls.forward: case controls.backward:
                     this.player.setLinearVelocity(
                         lv.add({ x: 0, y: 0, z: -lv.z })
                     );
                     break;
-                case "KeyA": case "KeyD":
+                case controls.left: case controls.right:
                     this.player.setLinearVelocity(
                         lv.add({ x: -lv.x, y: 0, z: 0 })
                     );
@@ -129,7 +135,7 @@ class Team {
     get player () { return this.players[this._current].mesh }
 
     changePlayer(nextOne = -1) {
-        this.player.material.color.set(0x805900);
+        this.player.material.color.set(this._colors[0]);
 
         if (nextOne < 0) {
             var min = Infinity; var nextOne;
@@ -142,7 +148,7 @@ class Team {
         }
         this._current = nextOne;
 
-        this.player.material.color.set(0xbf8600);
+        this.player.material.color.set(this._colors[1]);
     }
 
 
@@ -167,17 +173,17 @@ class Team {
         );
 
 
-        if (gamepad.buttons[0].pressed && !this._pressed["A"] && collizionDet == false) {
-            this._pressed["A"] = true;
+        if (gamepad.buttons[0].pressed && !this._pressed["GamepadA"] && collizionDet == false) {
+            this._pressed["GamepadA"] = true;
             this.changePlayer();
-        } else if (!gamepad.buttons[0].pressed && this._pressed["A"]) {
-            this._pressed["A"] = false;
+        } else if (!gamepad.buttons[0].pressed && this._pressed["GamepadA"]) {
+            this._pressed["GamepadA"] = false;
         }
-        if (gamepad.buttons[1].pressed && !this._pressed["B"] && collizionDet == true) {
-            this._pressed["B"] = true;
+        if (gamepad.buttons[1].pressed && !this._pressed["GamepadB"] && collizionDet == true) {
+            this._pressed["GamepadB"] = true;
             kickBall();
-        } else if (!gamepad.buttons[1].pressed && this._pressed["B"]) {
-            this._pressed["B"] = false;
+        } else if (!gamepad.buttons[1].pressed && this._pressed["GamepadB"]) {
+            this._pressed["GamepadB"] = false;
         }
     }
 
@@ -190,4 +196,24 @@ class Team {
 }
 
 
-var cubes = new Team(4);
+var team1 = new Team({
+        forward: "KeyW",
+        backward: "KeyS",
+        left: "KeyA",
+        right: "KeyD",
+        swap: "KeyE"
+    },
+    [0x805900, 0xbf8600],
+    1
+);
+
+var team2 = new Team({
+        forward: "KeyI",
+        backward: "KeyK",
+        left: "KeyJ",
+        right: "KeyL",
+        swap: "KeyO"
+    },
+    [0x550080, 0x8000bf],
+    -1
+);

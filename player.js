@@ -1,19 +1,20 @@
 class Player {
 
-    constructor(startingPoint, speed) {
+    constructor(startingPoint, speed, color, side) {
         this.startingPoint = startingPoint
         this.speed = speed;
         this.coverage = 2/3;
+        this.side = side;
 
         this.mesh = new Physijs.BoxMesh(
             new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshLambertMaterial({ color: 0x805900 }),
+            new THREE.MeshLambertMaterial({ color: color }),
             50
         );
         this.mesh.position.set(
             this.startingPoint.x,
             this.startingPoint.y,
-            this.startingPoint.z + 85 / 2
+            this.startingPoint.z
         );
         this.mesh.castShadow = true;
         scene.add(this.mesh);
@@ -34,9 +35,16 @@ class Player {
     useAI() {
         var ballPos = ball.position;
 
-        this.goTo({
-            x: ballPos.x * this.coverage + this.startingPoint.x,
-            z: ballPos.z * this.coverage + this.startingPoint.z,
-        })
+        if (ballPos.z > 0 && this.side > 0 || ballPos.z < 0 && this.side < 0) {
+            this.goTo({
+                x: ballPos.x * this.coverage + this.startingPoint.x * (1 - this.coverage),
+                z: ballPos.z * this.coverage + this.startingPoint.z * (1 - this.coverage),
+            });
+        } else {
+            this.goTo({
+                x: ballPos.x * (1 - this.coverage) + this.startingPoint.x * this.coverage,
+                z: ballPos.z * (1 - this.coverage) + (this.startingPoint.z - (fieldHeight / 2) * this.side) * this.coverage,
+            });
+        }
     }
 }

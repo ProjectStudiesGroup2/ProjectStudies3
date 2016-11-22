@@ -2,22 +2,26 @@ var render = function() {
     requestAnimationFrame(render);
 
 
-    camera.lookAt(cubes.player.position);
+    camera.lookAt(team1.player.position);
 
 
     if (gamepads[0]) {
-        cubes.useGamepad(gamepads[0]);
+        team1.useGamepad(gamepads[0]);
     }
 
-    for (var i in cubes.AIPlayers) {
-        cubes.AIPlayers[i].useAI();
+    for (var i in team1.AIPlayers) {
+        team1.AIPlayers[i].useAI();
+    }
+
+    for (var i in team2.AIPlayers) {
+        team2.AIPlayers[i].useAI();
     }
 
 
     detectCollision();
 
     if (collizionDet == true) {
-        ball.position.set( cubes.player.position.x, cubes.player.position.y + 0.9, cubes.player.position.z - 2);
+        ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
         ball.__dirtyPosition = true;
         ball.rotation.x = 0;
         ball.rotation.y = 0;
