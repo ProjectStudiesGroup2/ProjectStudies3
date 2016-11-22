@@ -36,7 +36,6 @@ var render = function() {
 
 
     detectCollision();
-
     if (collisionDet == true) {
         collisionDet2 = false;
         ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
@@ -46,10 +45,6 @@ var render = function() {
         collisionDet = false;
         ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
         setBallToPlayer();        
-    }
-
-    if (team2.player.position.z == team1.player.position.z - 2) {
-        collisionDet2 == true;
     }
 
 
