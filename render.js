@@ -1,8 +1,13 @@
 var render = function() {
     requestAnimationFrame(render);
 
-
-    camera.lookAt(ball.position);
+    if (collisionDet == true) {
+        camera.lookAt(team1.player.position);
+    }
+    else if (collisionDet2 == true) {
+        camera.lookAt(team2.player.position);
+    }
+    else { camera.lookAt(ball.position); }
 
 
     if (gamepads[0]) {
@@ -37,7 +42,7 @@ var render = function() {
             z: 0 })
         );
         collisionDet2 = false;
-    }
+    }    
     else if (collisionDet2 == true) {
         ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
         ball.__dirtyPosition = true;
