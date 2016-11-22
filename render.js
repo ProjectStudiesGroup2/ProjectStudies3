@@ -3,6 +3,7 @@ var render = function() {
 
 
     camera.lookAt(cubes.player.position);
+    // detector.lookAt(camera.position);   //change this for the over-gate goal counter
 
 
     if (gamepads[0]) {
@@ -12,6 +13,23 @@ var render = function() {
     for (var i in cubes.AIPlayers) {
         cubes.AIPlayers[i].useAI();
     }
+
+      //*** Goal Detector ***//
+    var originPoint = ball.position.clone();
+
+    for (var vertexIndex = 0; vertexIndex < ball.geometry.vertices.length; vertexIndex++){
+      var localVertex = ball.geometry.vertices[vertexIndex].clone();
+      var globalVertex = localVertex.applyMatrix4(ball.matrix);
+      var directionVector = globalVertex.sub(ball.position);
+
+      var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+      var collisionResults = ray.intersectObjects(collidableMeshList2);
+      if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
+        console.log('GOAL!');
+      };
+    }
+
+      //*** Goal Output ***//
 
 
     detectCollision();
