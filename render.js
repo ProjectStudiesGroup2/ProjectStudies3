@@ -8,11 +8,13 @@ var render = function() {
     if (gamepads[0]) {
         team1.useGamepad(gamepads[0]);
     }
+    if (gamepads[1]) {
+        team2.useGamepad(gamepads[1]);
+    }
 
     for (var i in team1.AIPlayers) {
         team1.AIPlayers[i].useAI();
     }
-
     for (var i in team2.AIPlayers) {
         team2.AIPlayers[i].useAI();
     }
