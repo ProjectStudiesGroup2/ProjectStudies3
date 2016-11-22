@@ -1,13 +1,23 @@
 var render = function() {
     requestAnimationFrame(render);
-
+    
     if (collisionDet == true) {
-        camera.lookAt(team1.player.position);
+        camera.position.z = team1.player.position.z;
+        camera.lookAt(team1.player.position);        
     }
     else if (collisionDet2 == true) {
+        camera.position.z = team2.player.position.z;
         camera.lookAt(team2.player.position);
     }
-    else { camera.lookAt(ball.position); }
+    else { 
+        camera.position.z = ball.position.z;
+        camera.lookAt(ball.position); 
+    }
+    // var relativeCameraOffset = new THREE.Vector3(100, 75, 0);
+    // var cameraOffset = relativeCameraOffset.applyMatrix4( ball.matrixWorld );
+    // camera.position.z = cameraOffset.z;
+    // camera.lookAt( team1.player.position );
+
 
 
     if (gamepads[0]) {

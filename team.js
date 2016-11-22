@@ -169,9 +169,9 @@ class Team {
     useGamepad(gamepad) {
         var lv = this.player.getLinearVelocity();
         this.player.setLinearVelocity(lv.add({
-            x: ((Math.abs(gamepad.axes[0]) > 0.25 ? gamepad.axes[0] : 0) * this._speed) - lv.x,
+            x: ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed) - lv.x,
             y: 0,
-            z: ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed) - lv.z
+            z: ((Math.abs(gamepad.axes[0]) > 0.25 ? gamepad.axes[0] : 0) * -this._speed) - lv.z
         }));
 
         this.rotatePlayer(
@@ -204,10 +204,10 @@ class Team {
 
 
 var team1 = new Team({
-        forward: "KeyW",
-        backward: "KeyS",
-        left: "KeyA",
-        right: "KeyD",
+        forward: "KeyD",
+        backward: "KeyA",
+        left: "KeyW",
+        right: "KeyS",
         swap: "KeyE"
     },
     [0x805900, 0xbf8600],
@@ -215,10 +215,10 @@ var team1 = new Team({
 );
 
 var team2 = new Team({
-        forward: "KeyI",
-        backward: "KeyK",
-        left: "KeyJ",
-        right: "KeyL",
+        forward: "KeyL",
+        backward: "KeyJ",
+        left: "KeyI",
+        right: "KeyK",
         swap2: "KeyO"
     },
     [0x550080, 0x8000bf],
