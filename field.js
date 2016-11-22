@@ -20,7 +20,7 @@ scene.add(field);
     
     //*** Side Bumpers ***//
 var sideGeometryL = new THREE.PlaneGeometry(200, 8, 0);
-var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0x197A22})
+var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0x197A22}) /* 0xfa3815 */
 var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 var sideGeometryR = new THREE.PlaneGeometry(200, 8, 0);
 var sideMaterialR = new THREE.MeshLambertMaterial({ color: 0x197A22})
