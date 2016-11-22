@@ -2,7 +2,7 @@ class Team {
 
     constructor(controls, colors, side) {
 
-        this._speed = 30;
+        this._speed = 26;
         this.players = [];
         this._current = 0;
         this._pressed = {};
@@ -210,7 +210,8 @@ var team1 = new Team({
         right: "KeyS",
         swap: "KeyE"
     },
-    [0x805900, 0xbf8600],
+    // [0x805900, 0xbf8600],
+    [0x7F0000, 0xB30B0B],
     1
 );
 
@@ -221,6 +222,7 @@ var team2 = new Team({
         right: "KeyK",
         swap2: "KeyO"
     },
-    [0x550080, 0x8000bf],
+    // [0x550080, 0x8000bf],
+    [0x19198E, 0x2C2CF5],
     -1
 );
