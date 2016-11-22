@@ -50,8 +50,15 @@ class Team {
 
 
         document.addEventListener('keydown', event => {
-            if (event.code == controls.swap && collizionDet == false ) {
+            if (event.code == controls.swap && collisionDet == false && collisionDet2 == false || 
+                event.code == controls.swap2 && collisionDet == false && collisionDet2 == false) {
                 this.changePlayer();
+            }
+            else if (event.code == controls.swap && collisionDet == false && collisionDet2 == true) {
+                team1.changePlayer();
+            }
+            else if (event.code == controls.swap2 && collisionDet == true && collisionDet2 == false) {
+                team2.changePlayer();
             }
 
             var lv = this.player.getLinearVelocity();
@@ -173,13 +180,13 @@ class Team {
         );
 
 
-        if (gamepad.buttons[0].pressed && !this._pressed["GamepadA"] && collizionDet == false) {
+        if (gamepad.buttons[0].pressed && !this._pressed["GamepadA"] && collisionDet == false) {
             this._pressed["GamepadA"] = true;
             this.changePlayer();
         } else if (!gamepad.buttons[0].pressed && this._pressed["GamepadA"]) {
             this._pressed["GamepadA"] = false;
         }
-        if (gamepad.buttons[1].pressed && !this._pressed["GamepadB"] && collizionDet == true) {
+        if (gamepad.buttons[1].pressed && !this._pressed["GamepadB"] && collisionDet == true) {
             this._pressed["GamepadB"] = true;
             kickBall();
         } else if (!gamepad.buttons[1].pressed && this._pressed["GamepadB"]) {
@@ -212,7 +219,7 @@ var team2 = new Team({
         backward: "KeyK",
         left: "KeyJ",
         right: "KeyL",
-        swap: "KeyO"
+        swap2: "KeyO"
     },
     [0x550080, 0x8000bf],
     -1

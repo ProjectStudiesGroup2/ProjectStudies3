@@ -2,7 +2,7 @@ var render = function() {
     requestAnimationFrame(render);
 
 
-    camera.lookAt(team1.player.position);
+    camera.lookAt(ball.position);
 
 
     if (gamepads[0]) {
@@ -22,7 +22,7 @@ var render = function() {
 
     detectCollision();
 
-    if (collizionDet == true) {
+    if (collisionDet == true) {
         ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
         ball.__dirtyPosition = true;
         ball.rotation.x = 0;
@@ -36,13 +36,31 @@ var render = function() {
             y: 0,
             z: 0 })
         );
+        collisionDet2 = false;
+    }
+    else if (collisionDet2 == true) {
+        ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
+        ball.__dirtyPosition = true;
+        ball.rotation.x = 0;
+        ball.rotation.y = 0;
+        ball.rotation.z = 0;
+        ball.__dirtyRotation = true;
+        var ballLV = ball.getLinearVelocity();
+        ball.setLinearVelocity(
+        ballLV.add({
+            x: 0,
+            y: 0,
+            z: 0 })
+        );
+        collisionDet = false;
     }
 
 
       //*** ball reset ***//
     if (ball.position.x <= -fieldWidth/2) {
         ballMoving = true;
-        collizionDet = false;
+        collisionDet = false;
+        collisionDet2 = false;
         ball.position.set(0, 4, 0);
         ball.__dirtyPosition = true;
         ball.rotation.set(0, 0, 0);
@@ -52,7 +70,8 @@ var render = function() {
     }
     else if (ball.position.x >= fieldWidth/2){
         ballMoving = true;
-        collizionDet = false;
+        collisionDet = false;
+        collisionDet2 = false;
         ball.position.set(0, 4, 0);
         ball.__dirtyPosition = true;
         ball.rotation.set(0, 0, 0);
@@ -62,7 +81,8 @@ var render = function() {
     }
     if (ball.position.z <= -fieldHeight/2){
         ballMoving = true;
-        collizionDet = false;
+        collisionDet = false;
+        collisionDet2 = false;
         ball.position.set(0, 4, 0);
         ball.__dirtyPosition = true;
         ball.rotation.set(0, 0, 0);
@@ -72,7 +92,8 @@ var render = function() {
     }
     else if (ball.position.z >= fieldHeight/2){
         ballMoving = true;
-        collizionDet = false;
+        collisionDet = false;
+        collisionDet2 = false;
         ball.position.set(0, 4, 0);
         ball.__dirtyPosition = true;
         ball.rotation.set(0, 0, 0);
