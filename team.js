@@ -48,7 +48,8 @@ class Team {
         }
 
         this.player.material.color.set(this._colors[1]);
-
+        var audioRun = new Audio('sounds/run.mp3');
+        audioRun.volume = 0.08;
 
         document.addEventListener('keydown', event => {
             if (event.code == controls.swap && collisionDet == false && collisionDet2 == false ||
@@ -69,21 +70,25 @@ class Team {
                     this.player.setLinearVelocity({
                         x: lv.x, y: lv.y, z: -this._speed
                     });
+                    audioRun.play();
                     break;
                 case controls.left:
                     this.player.setLinearVelocity({
                         x: -this._speed, y: lv.y, z: lv.z
                     });
+                    audioRun.play();
                     break;
                 case controls.backward:
                     this.player.setLinearVelocity({
                         x: lv.x, y: lv.y, z: this._speed
                     });
+                    audioRun.play();
                     break;
                 case controls.right:
                     this.player.setLinearVelocity({
                         x: this._speed, y: lv.y, z: lv.z
                     });
+                    audioRun.play();
                     break;
             }
         }, false);
@@ -97,15 +102,16 @@ class Team {
                     this.player.setLinearVelocity(
                         lv.add({ x: 0, y: 0, z: -lv.z })
                     );
+                    audioRun.pause();
                     break;
                 case controls.left: case controls.right:
                     this.player.setLinearVelocity(
                         lv.add({ x: -lv.x, y: 0, z: 0 })
                     );
+                    audioRun.pause();
                     break;
             }
-        }, false);
-
+        }, false);        
 
         var mouse = new THREE.Vector3(),
             ray = new THREE.Raycaster( new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,0) ),
