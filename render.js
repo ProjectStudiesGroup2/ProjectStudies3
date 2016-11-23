@@ -1,18 +1,22 @@
+var target = new THREE.Vector3(0, 0, 0);
+
 var render = function() {
     requestAnimationFrame(render);
-    
+
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
-        camera.lookAt(team1.player.position);        
+        target.copy(team1.player.position);
     }
     else if (collisionDet2 == true) {
         camera.position.z = team2.player.position.z;
-        camera.lookAt(team2.player.position);
+        target.copy(team2.player.position);
     }
-    else { 
+    else {
         camera.position.z = ball.position.z;
-        camera.lookAt(ball.position); 
+        target.copy(ball.position);
     }
+    target.x = 0;
+    camera.lookAt(target);
 
 
     if (gamepads[0]) {
@@ -35,11 +39,11 @@ var render = function() {
         collisionDet2 = false;
         ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
         setBallToPlayer();
-    } 
+    }
     else if (collisionDet2 == true) {
         collisionDet = false;
         ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
-        setBallToPlayer(); 
+        setBallToPlayer();
     }
 
 
