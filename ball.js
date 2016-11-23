@@ -188,6 +188,7 @@ function playWhistle() {
     var whistle3 = new Audio('sounds/03965.mp3');
     var myArray = [whistle, whistle2, whistle3]; 
     var rand = myArray[Math.floor(Math.random() * myArray.length)];    
+    rand.volume = 0.9;
     rand.play(); 
     return false;
 }

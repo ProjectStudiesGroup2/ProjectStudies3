@@ -20,7 +20,8 @@ scene.add(field);
     //*** Sounds of fans and teams players***//
 var fans = new Audio('sounds/fans.mp3');
 var teams = new Audio('sounds/teams.mp3');
-teams.volume = 0.4;
+fans.volume = 0.6;
+teams.volume = 0.3;
 fans.play();
 teams.play();
 fans.onended = function() {

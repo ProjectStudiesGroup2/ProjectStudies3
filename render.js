@@ -48,6 +48,7 @@ var render = function() {
       //*** Start game ***//
       if (start == true) {  
         resetBall();
+        playWhistle();  
         start = false;
       }
 
