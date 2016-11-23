@@ -52,6 +52,15 @@ var render = function() {
         resetBall();
     }
 
+
+    //*** Animated Texture ***//
+    var delta = clock.getDelta();
+    animL.update(1000 * delta);
+    animR.update(1000 * delta);
+    animTop.update(1000 * delta);
+    animBot.update(1000 * delta);
+
+
     scene.simulate();
     renderer.render(scene, camera);
 };
