@@ -61,6 +61,15 @@ class Team {
                 team2.changePlayer();
             }
 
+             else if (event.code == controls.swap3 && collisionDet == false && collisionDet2 == true) {
+                ////////////
+            }
+
+             else if (event.code == controls.swap4 && collisionDet == true && collisionDet2 == false) {
+                //////////////
+            }
+
+
             var lv = this.player.getLinearVelocity();
 
             switch (event.code) {
@@ -157,6 +166,10 @@ class Team {
 
         this.player.material.color.set(this._colors[1]);
     }
+    playGoalie() {
+
+
+    }
 
 
     rotatePlayer(y, x) {
@@ -209,6 +222,7 @@ var team1 = new Team({
         left: "KeyW",
         right: "KeyS",
         swap: "KeyE"
+            
     },
     [0x805900, 0xbf8600],
     1
@@ -220,6 +234,7 @@ var team2 = new Team({
         left: "KeyI",
         right: "KeyK",
         swap2: "KeyO"
+        
     },
     [0x550080, 0x8000bf],
     -1

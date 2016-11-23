@@ -10,20 +10,36 @@ var render = function() {
               camera.position.x -= 1;
              camera.lookAt(team1.player.position);
          }
-    }
+         toggle();
+     }
+         else {
+            camera.lookAt(team1.player.position);
+            untoggle();
+
+        }
+              
+
+  
      }      
         
     else if (collisionDet2 == true) {
         camera.position.z = team2.player.position.z;
-        camera.lookAt(team2.player.position);
+        
         if (team2.player.position.z >= 65 || team2.player.position.z <= -65) 
         {
               
              while (camera.position.x >= 5 ) {
               camera.position.x -= 1;
              camera.lookAt(team2.player.position);}
+             toggle();
                     
-        }  
+        }
+        else  {
+        
+         camera.lookAt(team2.player.position);
+         untoggle();
+     }
+        
     }
     else { 
         camera.position.z = ball.position.z;
