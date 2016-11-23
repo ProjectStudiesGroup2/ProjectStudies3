@@ -1,25 +1,20 @@
 var render = function() {
     requestAnimationFrame(render);
-<<<<<<< HEAD
 
-
-    camera.lookAt(cubes.player.position);
     // detector.lookAt(camera.position);   //change this for the over-gate goal counter
-=======
-    
+
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
-        camera.lookAt(team1.player.position);        
+        camera.lookAt(team1.player.position);
     }
     else if (collisionDet2 == true) {
         camera.position.z = team2.player.position.z;
         camera.lookAt(team2.player.position);
     }
-    else { 
+    else {
         camera.position.z = ball.position.z;
-        camera.lookAt(ball.position); 
+        camera.lookAt(ball.position);
     }
->>>>>>> 1dba1b7c028b1370420a5481c06b9cc8f45a8c62
 
 
     if (gamepads[0]) {
@@ -59,11 +54,11 @@ var render = function() {
         collisionDet2 = false;
         ball.position.set( team1.player.position.x, team1.player.position.y + 0.9, team1.player.position.z - 2);
         setBallToPlayer();
-    } 
+    }
     else if (collisionDet2 == true) {
         collisionDet = false;
         ball.position.set( team2.player.position.x, team2.player.position.y + 0.9, team2.player.position.z + 2);
-        setBallToPlayer(); 
+        setBallToPlayer();
     }
 
 

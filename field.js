@@ -1,6 +1,7 @@
     //*** Texture ***//
 var textureGrass = textureLoader.load("textures/field.jpg");
 textureGrass.anisotropy = 3;
+// textureGrass.offset.x = 1;
 // textureGrass.wrapS = textureGrass.wrapT = THREE.RepeatWrapping;
 // textureGrass.repeat.set(11, 11);
 
@@ -17,7 +18,7 @@ field.rotation.x = -.5 * Math.PI;
 field.receiveShadow = true;
 scene.add(field);
 
-    
+
     //*** Side Bumpers ***//
 var sideGeometryL = new THREE.PlaneGeometry(200, 8, 0);
 var sideMaterialL = new THREE.MeshLambertMaterial({ color: 0x197A22}) /* 0xfa3815 */
@@ -61,14 +62,14 @@ var postR2 = new Physijs.CylinderMesh(postGeometry, postMaterial, 0);
 var crossbar2 = new Physijs.CylinderMesh(crossGeometry, postMaterial, 0);
 
 var goalHeight = 8;
-postL1.position.set(-10, goalHeight - 8.6, -85);
-postR1.position.set(10, goalHeight - 8.6, -85);
-crossbar1.position.set(0, goalHeight - 4, -85);
+postL1.position.set(-10, goalHeight - 8.6, -89);
+postR1.position.set(10, goalHeight - 8.6, -89);
+crossbar1.position.set(0, goalHeight - 4, -89);
 crossbar1.rotation.z = -.5 * Math.PI;
 
-postL2.position.set(-10, goalHeight - 8.6, 85);
-postR2.position.set(10, goalHeight - 8.6, 85);
-crossbar2.position.set(0, goalHeight - 4, 85);
+postL2.position.set(-10, goalHeight - 8.6, 89);
+postR2.position.set(10, goalHeight - 8.6, 89);
+crossbar2.position.set(0, goalHeight - 4, 89);
 crossbar2.rotation.z = -.5 * Math.PI;
 
 scene.add(postL1);
