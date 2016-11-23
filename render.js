@@ -52,11 +52,19 @@ var render = function() {
       }
 
       //*** Ball reset ***//
-    if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
-        || ball.position.z <= -fieldHeight/2 || ball.position.z >= fieldHeight/2) {
-        resetBall();
+    if ( ball.position.x <= -fieldWidth/1.8 || ball.position.x >= fieldWidth/1.8 ) {        
+        playWhistle();
+        resetBall();   
     }
-
+    else if ( ball.position.z <= -fieldHeight/1.8 ) {
+        resetBallToRight();
+        playWhistle();
+    }
+    else if ( ball.position.z >= fieldHeight/1.8 ) {
+        resetBallToLeft();
+        playWhistle();  
+    }
+        
 
     //*** Animated Texture ***//
     var delta = clock.getDelta();

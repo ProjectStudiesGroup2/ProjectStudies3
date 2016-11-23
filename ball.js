@@ -104,15 +104,15 @@ document.addEventListener('keydown', event => {
 document.addEventListener('keyup', event => {
     if (event.code == "Space" && collisionDet == true && strengthTimer <= 3 ||
         event.code == "Space" && collisionDet2 == true && strengthTimer <= 3 ) {
-        kickBall(10, 2);
+        kickBall(12, 2);
     }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 5 ||
         event.code == "Space" && collisionDet2 == true && strengthTimer <= 5 ) {
-        kickBall(25, 5);
+        kickBall(23, 5);
     }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 8 ||
              event.code == "Space" && collisionDet2 == true && strengthTimer <= 8) {
-        kickBall(35, 7);
+        kickBall(38, 7);
     }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 10 ||
              event.code == "Space" && collisionDet2 == true && strengthTimer <= 10) {
@@ -142,20 +142,52 @@ function setBallToPlayer() {
 
 
 // Reset ball to field
-function resetBall() {
-    var whistle = new Audio('sounds/03963.mp3');
-    var whistle2 = new Audio('sounds/03964.mp3');
-    var whistle3 = new Audio('sounds/03965.mp3');
-    var myArray = [whistle, whistle2, whistle3]; 
-    var rand = myArray[Math.floor(Math.random() * myArray.length)]; 
-    rand.play();
+function resetBall(event) {
     ballMoving = true;
     collisionDet = false;
     collisionDet2 = false;
-    ball.position.set(0, 4, 0);
+    ball.position.set(0, 3, 0);
     ball.__dirtyPosition = true;
     ball.rotation.set(0, 0, 0);
     ball.__dirtyRotation = true;
     ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
     ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
+    return false;
+}
+
+function resetBallToRight(event) {
+    ballMoving = true;
+    collisionDet = false;
+    collisionDet2 = false;
+    ball.position.set(0, 4, -50);
+    ball.__dirtyPosition = true;
+    ball.rotation.set(0, 0, 0);
+    ball.__dirtyRotation = true;
+    ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
+    ball.setAngularVelocity({ x: 0, y: 0, z: 0 }); 
+    return false;
+}
+
+function resetBallToLeft(event) {
+    ballMoving = true;
+    collisionDet = false;
+    collisionDet2 = false;
+    ball.position.set(0, 4, 50);
+    ball.__dirtyPosition = true;
+    ball.rotation.set(0, 0, 0);
+    ball.__dirtyRotation = true;
+    ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
+    ball.setAngularVelocity({ x: 0, y: 0, z: 0 }); 
+    return false;
+}
+
+// Whistle sound
+function playWhistle() {
+    var whistle = new Audio('sounds/03963.mp3');
+    var whistle2 = new Audio('sounds/03964.mp3');
+    var whistle3 = new Audio('sounds/03965.mp3');
+    var myArray = [whistle, whistle2, whistle3]; 
+    var rand = myArray[Math.floor(Math.random() * myArray.length)];    
+    rand.play(); 
+    return false;
 }
