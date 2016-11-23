@@ -49,7 +49,7 @@ class Team {
 
         this.player.material.color.set(this._colors[1]);
         var audioRun = new Audio('sounds/run.mp3');
-        audioRun.volume = 0.08;
+        audioRun.volume = 0.085;
 
         document.addEventListener('keydown', event => {
             if (event.code == controls.swap && collisionDet == false && collisionDet2 == false ||
