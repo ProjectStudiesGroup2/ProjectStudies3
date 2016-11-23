@@ -17,6 +17,13 @@ field.rotation.x = -.5 * Math.PI;
 field.receiveShadow = true;
 scene.add(field);
 
+    //*** Sounds ***//
+var fans = new Audio('sounds/fans.mp3');
+var teams = new Audio('sounds/teams.mp3');
+teams.volume = 0.4;
+fans.play();
+teams.play();
+
 
     //*** Goal ***//
 var postGeometry = new THREE.CylinderGeometry(.5, .5, 10);

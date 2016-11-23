@@ -45,6 +45,11 @@ var render = function() {
         setBallToPlayer();
     }
 
+      //*** Start game ***//
+      if (start == true) {  
+        resetBall();
+        start = false;
+      }
 
       //*** Ball reset ***//
     if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
