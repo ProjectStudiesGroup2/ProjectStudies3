@@ -3,11 +3,27 @@ var render = function() {
     
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
-        camera.lookAt(team1.player.position);        
+         camera.lookAt(team1.player.position); 
+        if (team1.player.position.z >= 65 || team1.player.position.z <= -65) 
+        {     
+             while (camera.position.x >= 5 ) {
+              camera.position.x -= 1;
+             camera.lookAt(team1.player.position);
+         }
     }
+     }      
+        
     else if (collisionDet2 == true) {
         camera.position.z = team2.player.position.z;
         camera.lookAt(team2.player.position);
+        if (team2.player.position.z >= 65 || team2.player.position.z <= -65) 
+        {
+              
+             while (camera.position.x >= 5 ) {
+              camera.position.x -= 1;
+             camera.lookAt(team2.player.position);}
+                    
+        }  
     }
     else { 
         camera.position.z = ball.position.z;
@@ -58,6 +74,7 @@ var render = function() {
         || ball.position.z <= -fieldHeight/2 || ball.position.z >= fieldHeight/2) {
         resetBall();
     }
+    //*** camera zoom to the ball***//
 
     scene.simulate();
     renderer.render(scene, camera);

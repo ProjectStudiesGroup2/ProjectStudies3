@@ -5,7 +5,6 @@ var arrow = new THREE.ArrowHelper(
 			0xff3300
 		);
 
-arrow.position.set(0, 5.5, -80);
+//arrow.position.set(0, 5.5, -80);
 		scene.add(arrow);
-
 
