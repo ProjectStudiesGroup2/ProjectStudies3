@@ -24,7 +24,7 @@ scene.add(field);
 
     //*** Ground arond field ***//
 var ground = new Physijs.BoxMesh(
-  new THREE.PlaneGeometry(110, 220),
+  new THREE.PlaneGeometry(115, 220),
   new THREE.MeshLambertMaterial({ map: textureGrassAround }),
   0
 );
@@ -49,7 +49,7 @@ teams.onended = function() {
     teams.play();
 };
 
-    //*** Goal ***//
+    //*** Goal gates ***//
 var postGeometry = new THREE.CylinderGeometry(.5, .5, 10);
 var crossGeometry = new THREE.CylinderGeometry(.5, .5 ,20);
 var postMaterial = new THREE.MeshLambertMaterial({ color: 0xbcbaba });
@@ -84,7 +84,7 @@ scene.add(crossbar2);
     //*** Side Bumpers ***//
 var sideTextureL = textureLoader.load('explosion.jpg');
 animL = new TextureAnimator(sideTextureL, 4, 4, 16, 55);
-var sideGeometryL = new THREE.PlaneGeometry(200, 8, 0);
+var sideGeometryL = new THREE.PlaneGeometry(220, 8, 0);
 var sideMaterialL = new THREE.MeshLambertMaterial({ map: sideTextureL })
 var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 
@@ -96,25 +96,25 @@ var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 
 var sideTextureTop = textureLoader.load('explosion.jpg');
 animTop = new TextureAnimator(sideTextureTop, 4, 4, 16, 55);
-var sideGeometryTop = new THREE.PlaneGeometry(100, 8, 0);
+var sideGeometryTop = new THREE.PlaneGeometry(116, 8, 0);
 var sideMaterialTop = new THREE.MeshLambertMaterial({ map: sideTextureTop })
 var sideTop = new Physijs.Mesh(sideGeometryTop, sideMaterialTop);
 
 var sideTextureBot = textureLoader.load('explosion.jpg');
 animBot = new TextureAnimator(sideTextureBot, 4, 4, 16, 55);
-var sideGeometryBot = new THREE.PlaneGeometry(100, 8, 0);
+var sideGeometryBot = new THREE.PlaneGeometry(116, 8, 0);
 var sideMaterialBot = new THREE.MeshLambertMaterial({ map: sideTextureBot })
 var sideBot = new Physijs.Mesh(sideGeometryBot, sideMaterialBot);
 
-sideL.position.set(-57, -2, 0);
+sideL.position.set(-59, -2, 0);
 sideGeometryL.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / 2));
 sideGeometryL.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / 5));
 // sideR.position.set(57, -2, 0);
 // sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / -2));
 // sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / -5));
-sideTop.position.set(0, -2, -107);
+sideTop.position.set(0, -2, -110);
 sideGeometryTop.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / -5));
-sideBot.position.set(0, -2, 107);
+sideBot.position.set(0, -2, 110);
 sideGeometryBot.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI * 7));
 scene.add(sideL);
 // scene.add(sideR);

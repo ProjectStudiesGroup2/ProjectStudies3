@@ -53,7 +53,7 @@ var render = function() {
       }
 
       //*** Ball reset ***//
-    if ( ball.position.x <= -fieldWidth/1.8 || ball.position.x >= fieldWidth/1.8 ) {        
+    if ( ball.position.x <= -fieldWidth/1.7 || ball.position.x >= fieldWidth/1.7 ) {        
         playWhistle();
         resetBall();   
     }
