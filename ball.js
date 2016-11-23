@@ -1,7 +1,7 @@
                  /************\
                 |*   Ball   *|
                 \************/
-var collisionDet2 = false;                
+var collisionDet2 = false;
 var collisionDet = false;
 var collidableMeshList = [];
 
@@ -43,7 +43,7 @@ function detectCollision() {
                 collisionDet = false;
             }
         }
-            
+
     var originPoint = team1.player.position.clone();
     for (var vertexIndex = 0; vertexIndex < team1.player.geometry.vertices.length; vertexIndex++ )
         {
@@ -57,7 +57,7 @@ function detectCollision() {
                 collisionDet = true;
                 collisionDet2 = false;
             }
-        } 
+        }
 }
 
 
@@ -81,7 +81,7 @@ function kickBall(strength) {
     }
     else if (collisionDet2 == true) {
         ball.setLinearVelocity(lv.add(kick2));
-    }    
+    }
     collisionDet = false;
     collisionDet2 = false;
 }
@@ -98,24 +98,24 @@ document.addEventListener('keyup', event => {
     if (event.code == "Space" && collisionDet == true && strengthTimer <= 3 ||
         event.code == "Space" && collisionDet2 == true && strengthTimer <= 3 ) {
         kickBall(10);
-    }  
+    }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 7 ||
         event.code == "Space" && collisionDet2 == true && strengthTimer <= 7 ) {
         kickBall(25);
-    }  
+    }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 11 ||
              event.code == "Space" && collisionDet2 == true && strengthTimer <= 11) {
         kickBall(35);
-    }  
+    }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 14 ||
              event.code == "Space" && collisionDet2 == true && strengthTimer <= 14) {
         kickBall(50);
-    }  
+    }
     else if (event.code == "Space" && collisionDet == true && strengthTimer > 14 ||
              event.code == "Space" && collisionDet2 == true && strengthTimer > 14) {
         kickBall(62);
-    }  
-    strengthTimer = 0;    
+    }
+    strengthTimer = 0;
 });
 
 function setBallToPlayer() {

@@ -1,5 +1,4 @@
 var target = new THREE.Vector3(0, 0, 0);
-
 var render = function() {
     requestAnimationFrame(render);
 
