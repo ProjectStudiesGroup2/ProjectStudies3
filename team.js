@@ -168,12 +168,12 @@ class Team {
 
 
     useGamepad(gamepad) {
+        var lv = this.player.getLinearVelocity();
         this.player.setLinearVelocity(new THREE.Vector3(
             ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed),
             lv.y,
             ((Math.abs(gamepad.axes[0]) > 0.25 ? -gamepad.axes[0] : 0) * this._speed)
         ));
-        console.log(this.player.getLinearVelocity());
 
         this.rotatePlayer(
             Math.abs(gamepad.axes[3]) > 0.25 ? -gamepad.axes[3] : 0,
