@@ -118,6 +118,10 @@ document.addEventListener('keyup', event => {
              event.code == "Space" && collisionDet2 == true && strengthTimer <= 10) {
         kickBall(52, 10);
     }
+    else if (event.code == "Space" && collisionDet == true && strengthTimer == 11 ||
+             event.code == "Space" && collisionDet2 == true && strengthTimer == 11) {
+        kickBall(58, 10);
+    }
     else if (event.code == "Space" && collisionDet == true && strengthTimer > 12 ||
              event.code == "Space" && collisionDet2 == true && strengthTimer > 12) {
         kickBall(63, 13);
