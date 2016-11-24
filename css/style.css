@@ -1,10 +1,21 @@
-#message {
+.message {
     position: absolute;
     display: block;
+    font-style: normal;
+    text-decoration: none;
+    font-size: 30px;
     top: 20px;
-    left: 50%;
     z-index: 1000;
 }
+.m1{   
+    color: darkred; 
+    left: 35%;
+}
+.m2 {
+    color: darkblue;
+    left: 52%;
+}
+
 .box {
     position: fixed;
     top: 0.9px;
@@ -15,7 +26,6 @@
     opacity: 0.5;
     z-index: 100;
 }
-
 .box2 {
     position: fixed;;
     top: 0.9px;
@@ -28,7 +38,6 @@
     opacity: 0.8;    
     z-index: 50;
 }
-
 .box3 {
     position: fixed;;
     top: 0;

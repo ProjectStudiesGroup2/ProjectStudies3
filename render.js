@@ -2,7 +2,7 @@ var target = new THREE.Vector3(0, 0, 0);
 var render = function() {
     requestAnimationFrame(render);
 
-    // scoresprite.lookAt(camera.position);   //change this for the over-gate goal counter
+    //  scoresprite.lookAt(camera.position);   //change this for the over-gate goal counter
 
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
@@ -15,19 +15,20 @@ var render = function() {
         target.copy(ball.position);
     }
 
-    if (Math.abs(ball.position.z) > 55 && Math.abs(ball.position.x) < 35) {
-        camera.position.x = 5;
-        toggle();
+    if (Math.abs(ball.position.z) >= 45 && Math.abs(ball.position.x) <= 35) {
+        camera.position.x = 60;
+        camera.position.y = 60;        
+        fans.volume = 0.7;
 
         if (ball.position.z > 0) {
             team1.goalieEnable = true;
-        } else {
+        } else if ((ball.position.z <= 0) ) {
             team2.goalieEnable = true;
         }
-    } else {
+    } else {                
+        fans.volume = 0.6;
         camera.position.x = 95;
-        untoggle();
-
+        camera.position.y = 80;
         team1.goalieEnable = false;
         team2.goalieEnable = false;
     }
@@ -52,6 +53,8 @@ var render = function() {
 
       //*** Goal Detector ***//
     var originPoint = ball.position.clone();
+    var goalOvations = new Audio('sounds/goal.mp3');
+    goalOvations.volume = 0.75;
 
     for (var vertexIndex = 0; vertexIndex < ball.geometry.vertices.length; vertexIndex++){
       var localVertex = ball.geometry.vertices[vertexIndex].clone();
@@ -61,21 +64,26 @@ var render = function() {
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
       var collisionResults = ray.intersectObject(detector);
       if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
-        scoreT1++;
-        message = scoreT1;
-
-        scoresprite.materialScore.map.needsUpdate = true;
         resetBall();
+        scoreT1 = scoreT1 + 1;
+        message = scoreT1;
+        goalOvations.play();
         console.log('GOAL! on gate R', scoreT1);
       };
       var ray2 = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
       var collisionResults2 = ray2.intersectObject(detector2);
       if (collisionResults2.length > 0 && collisionResults2[0].distance < directionVector.length()){
-        scoreT2++;
         resetBall();
+        scoreT2 = scoreT2 + 1;
+        message = scoreT2;
+        goalOvations.play();
         console.log('GOAL! on gate L', scoreT2);
       };
     }
+
+    $('#score1').empty().append(scoreT1);
+    $('#score2').empty().append(scoreT2);
+      /***************************/
 
     detectCollision();
     if (collisionDet == true) {

@@ -38,7 +38,7 @@ function detectCollision() {
 
             var ray = new THREE.Raycaster( originPoint2, directionVector.clone().normalize() );
             var collisionResults = ray.intersectObjects( collidableMeshList );
-            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.08 ) {
+            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.09 ) {
                 collisionDet2 = true;
                 collisionDet = false;
             }
@@ -53,7 +53,7 @@ function detectCollision() {
 
             var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
             var collisionResults = ray.intersectObjects( collidableMeshList );
-            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.08 ) {
+            if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.09 ) {
                 collisionDet = true;
                 collisionDet2 = false;
             }
@@ -163,7 +163,7 @@ function resetBallToRight(event) {
     ballMoving = true;
     collisionDet = false;
     collisionDet2 = false;
-    ball.position.set(0, 4, -50);
+    ball.position.set(0, 4, -75);
     ball.__dirtyPosition = true;
     ball.rotation.set(0, 0, 0);
     ball.__dirtyRotation = true;
@@ -176,7 +176,7 @@ function resetBallToLeft(event) {
     ballMoving = true;
     collisionDet = false;
     collisionDet2 = false;
-    ball.position.set(0, 4, 50);
+    ball.position.set(0, 4, 75);
     ball.__dirtyPosition = true;
     ball.rotation.set(0, 0, 0);
     ball.__dirtyRotation = true;
