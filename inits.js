@@ -3,11 +3,6 @@ Physijs.scripts.ammo = 'ammo.js';
 
 var scene = new Physijs.Scene();
 
-/*** Axis ***/
-var axis = new THREE.AxisHelper(10);
-axis.position.set(0, 0, 0);
-scene.add(axis);
-
 var textureLoader = new THREE.TextureLoader();
 
 var renderer = new THREE.WebGLRenderer();

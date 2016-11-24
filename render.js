@@ -1,3 +1,4 @@
+var target = new THREE.Vector3(0, 0, 0);
 var render = function() {
     requestAnimationFrame(render);
 
@@ -5,16 +6,18 @@ var render = function() {
 
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
-        camera.lookAt(team1.player.position);
+        target.copy(team1.player.position);
     }
     else if (collisionDet2 == true) {
         camera.position.z = team2.player.position.z;
-        camera.lookAt(team2.player.position);
+        target.copy(team2.player.position);
     }
     else {
         camera.position.z = ball.position.z;
-        camera.lookAt(ball.position);
+        target.copy(ball.position);
     }
+    target.x = 0;
+    camera.lookAt(target);
 
 
     if (gamepads[0]) {
@@ -61,12 +64,35 @@ var render = function() {
         setBallToPlayer();
     }
 
+      //*** Start game ***//
+      if (start == true) {
+        resetBall();
+        playWhistle();
+        start = false;
+      }
 
       //*** Ball reset ***//
-    if (ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2
-        || ball.position.z <= -fieldHeight/2 || ball.position.z >= fieldHeight/2) {
+    if ( ball.position.x <= -fieldWidth/1.7 || ball.position.x >= fieldWidth/1.7 ) {
+        playWhistle();
         resetBall();
     }
+    else if ( ball.position.z <= -fieldHeight/1.8 ) {
+        resetBallToRight();
+        playWhistle();
+    }
+    else if ( ball.position.z >= fieldHeight/1.8 ) {
+        resetBallToLeft();
+        playWhistle();
+    }
+
+
+    //*** Animated Texture ***//
+    var delta = clock.getDelta();
+    animL.update(1000 * delta);
+    // animR.update(1000 * delta);
+    animTop.update(1000 * delta);
+    animBot.update(1000 * delta);
+
 
     scene.simulate();
     renderer.render(scene, camera);

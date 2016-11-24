@@ -8,6 +8,7 @@ class Team {
         this._pressed = {};
         this.playerRotation = 0;
         this._colors = colors;
+        this._triggerMax = 0;
 
         for (var i = 0; i < 4; i++) {
             switch (i) {
@@ -47,10 +48,11 @@ class Team {
         }
 
         this.player.material.color.set(this._colors[1]);
-
+        var audioRun = new Audio('sounds/run.mp3');
+        audioRun.volume = 0.085;
 
         document.addEventListener('keydown', event => {
-            if (event.code == controls.swap && collisionDet == false && collisionDet2 == false || 
+            if (event.code == controls.swap && collisionDet == false && collisionDet2 == false ||
                 event.code == controls.swap2 && collisionDet == false && collisionDet2 == false) {
                 this.changePlayer();
             }
@@ -68,21 +70,25 @@ class Team {
                     this.player.setLinearVelocity({
                         x: lv.x, y: lv.y, z: -this._speed
                     });
+                    audioRun.play();
                     break;
                 case controls.left:
                     this.player.setLinearVelocity({
                         x: -this._speed, y: lv.y, z: lv.z
                     });
+                    audioRun.play();
                     break;
                 case controls.backward:
                     this.player.setLinearVelocity({
                         x: lv.x, y: lv.y, z: this._speed
                     });
+                    audioRun.play();
                     break;
                 case controls.right:
                     this.player.setLinearVelocity({
                         x: this._speed, y: lv.y, z: lv.z
                     });
+                    audioRun.play();
                     break;
             }
         }, false);
@@ -96,15 +102,16 @@ class Team {
                     this.player.setLinearVelocity(
                         lv.add({ x: 0, y: 0, z: -lv.z })
                     );
+                    audioRun.pause();
                     break;
                 case controls.left: case controls.right:
                     this.player.setLinearVelocity(
                         lv.add({ x: -lv.x, y: 0, z: 0 })
                     );
+                    audioRun.pause();
                     break;
             }
-        }, false);
-
+        }, false);        
 
         var mouse = new THREE.Vector3(),
             ray = new THREE.Raycaster( new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,0) ),
@@ -168,11 +175,11 @@ class Team {
 
     useGamepad(gamepad) {
         var lv = this.player.getLinearVelocity();
-        this.player.setLinearVelocity(lv.add({
-            x: ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed) - lv.x,
-            y: 0,
-            z: ((Math.abs(gamepad.axes[0]) > 0.25 ? gamepad.axes[0] : 0) * -this._speed) - lv.z
-        }));
+        this.player.setLinearVelocity(new THREE.Vector3(
+            ((Math.abs(gamepad.axes[1]) > 0.25 ? gamepad.axes[1] : 0) * this._speed),
+            lv.y,
+            ((Math.abs(gamepad.axes[0]) > 0.25 ? -gamepad.axes[0] : 0) * this._speed)
+        ));
 
         this.rotatePlayer(
             Math.abs(gamepad.axes[3]) > 0.25 ? -gamepad.axes[3] : 0,
@@ -186,11 +193,14 @@ class Team {
         } else if (!gamepad.buttons[0].pressed && this._pressed["GamepadA"]) {
             this._pressed["GamepadA"] = false;
         }
-        if (gamepad.buttons[1].pressed && !this._pressed["GamepadB"] && collisionDet == true) {
-            this._pressed["GamepadB"] = true;
-            kickBall();
-        } else if (!gamepad.buttons[1].pressed && this._pressed["GamepadB"]) {
-            this._pressed["GamepadB"] = false;
+        if (collisionDet == true) {
+            var stength = (gamepad.axes[5] + 1) / 2;
+            if (this._triggerMax > stength) {
+                kickBall(this._triggerMax * 62);
+                this._triggerMax = 0;
+            } else {
+                this._triggerMax = stength;
+            }
         }
     }
 
