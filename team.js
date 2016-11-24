@@ -9,6 +9,8 @@ class Team {
         this.playerRotation = 0;
         this._colors = colors;
         this._triggerMax = 0;
+        this.goalieEnable = false;
+        this.goalieControled = false;
 
         for (var i = 0; i < 4; i++) {
             switch (i) {
@@ -62,6 +64,15 @@ class Team {
             else if (event.code == controls.swap2 && collisionDet == true && collisionDet2 == false) {
                 team2.changePlayer();
             }
+
+             else if (event.code == controls.swap3 && collisionDet == false && collisionDet2 == true) {
+                ////////////
+            }
+
+             else if (event.code == controls.swap4 && collisionDet == true && collisionDet2 == false) {
+                //////////////
+            }
+
 
             var lv = this.player.getLinearVelocity();
 
@@ -146,21 +157,44 @@ class Team {
     }
 
 
-    get player () { return this.players[this._current].mesh }
+    get player () {
+        if (this.goalieEnable && this.goalieControled) {
+            if (this == team2) {
+                return goalie2;
+            } else {
+                return goalie1;
+            }
+        } else {
+            return this.players[this._current].mesh;
+        }
+    }
 
     changePlayer(nextOne = -1) {
-        this.player.material.color.set(this._colors[0]);
+        if (this.goalieControled) {
+            if (this == team2) {
+                this.player.material.color.set(0x198c8c);
+            } else {
+                this.player.material.color.set(0x80007f);
+            }
+        } else {
+            this.player.material.color.set(this._colors[0]);
+        }
 
-        if (nextOne < 0) {
-            var min = Infinity; var nextOne;
-            for (var i = 0; i < this.players.length; i++) {
-                var dist = this.players[i].mesh.position.distanceTo(ball.position);
-                if (dist < min && i != this._current) {
-                    min = dist; nextOne = i;
+        if (this.goalieEnable && !this.goalieControled) {
+            this.goalieControled = true;
+        } else {
+            this.goalieControled = false;
+            if (nextOne < 0) {
+                var min = Infinity; var nextOne;
+                for (var i = 0; i < this.players.length; i++) {
+                    var dist = this.players[i].mesh.position.distanceTo(ball.position);
+                    if (dist < min && i != this._current) {
+                        min = dist; nextOne = i;
+                    }
                 }
             }
+            this._current = nextOne;
         }
-        this._current = nextOne;
 
         this.player.material.color.set(this._colors[1]);
     }
@@ -220,6 +254,7 @@ var team1 = new Team({
         left: "KeyW",
         right: "KeyS",
         swap: "KeyE"
+
     },
     // [0x805900, 0xbf8600],
     [0x7F0000, 0xB30B0B],
@@ -232,6 +267,7 @@ var team2 = new Team({
         left: "KeyI",
         right: "KeyK",
         swap2: "KeyO"
+
     },
     // [0x550080, 0x8000bf],
     [0x19198E, 0x2C2CF5],
