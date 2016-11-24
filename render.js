@@ -62,7 +62,6 @@ var render = function() {
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
       var collisionResults = ray.intersectObject(detector);
       if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
-        scoreT1++;
         resetBall();
         scoreT1 = scoreT1 + 1;
         message = scoreT1;
