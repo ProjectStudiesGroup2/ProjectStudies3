@@ -46,9 +46,6 @@ var render = function() {
       var collisionResults = ray.intersectObject(detector);
       if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
         scoreT1++;
-        message = scoreT1;
-
-        scoresprite.materialScore.map.needsUpdate = true;
         resetBall();
         console.log('GOAL! on gate R', scoreT1);
       };
