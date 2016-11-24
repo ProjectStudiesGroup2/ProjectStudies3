@@ -159,18 +159,28 @@ class Team {
 
     get player () {
         if (this.goalieEnable && this.goalieControled) {
-            return this.players[this._current].mesh;
+            if (this == team2) {
+                return goalie2;
+            } else {
+                return goalie1;
+            }
         } else {
             return this.players[this._current].mesh;
         }
     }
 
     changePlayer(nextOne = -1) {
-        console.log(this.goalieEnable, "&&", !this.goalieControled);
-        this.player.material.color.set(this._colors[0]);
+        if (this.goalieControled) {
+            if (this == team2) {
+                this.player.material.color.set(0x198c8c);
+            } else {
+                this.player.material.color.set(0x80007f);
+            }
+        } else {
+            this.player.material.color.set(this._colors[0]);
+        }
 
         if (this.goalieEnable && !this.goalieControled) {
-            console.log("perfect");
             this.goalieControled = true;
         } else {
             this.goalieControled = false;
