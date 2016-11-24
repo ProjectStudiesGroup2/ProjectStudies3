@@ -18,11 +18,9 @@ var render = function() {
         toggle();
 
         if (ball.position.z > 0) {
-            team1.goalieEnable = false;
-            team2.goalieEnable = true;
-        } else {
             team1.goalieEnable = true;
-            team2.goalieEnable = false;
+        } else {
+            team2.goalieEnable = true;
         }
     } else {
         camera.position.x = 95;
@@ -34,11 +32,6 @@ var render = function() {
 
     target.x = 0;
     camera.lookAt(target);
-
-
-    if (team1.goalieEnable) { console.log("team1"); }
-    else if (team2.goalieEnable) { console.log("team2"); }
-    else { console.log("00000"); }
 
 
     if (gamepads[0]) {

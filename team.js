@@ -10,6 +10,7 @@ class Team {
         this._colors = colors;
         this._triggerMax = 0;
         this.goalieEnable = false;
+        this.goalieControled = false;
 
         for (var i = 0; i < 4; i++) {
             switch (i) {
@@ -156,27 +157,36 @@ class Team {
     }
 
 
-    get player () { return this.players[this._current].mesh }
+    get player () {
+        if (this.goalieEnable && this.goalieControled) {
+            return this.players[this._current].mesh;
+        } else {
+            return this.players[this._current].mesh;
+        }
+    }
 
     changePlayer(nextOne = -1) {
+        console.log(this.goalieEnable, "&&", !this.goalieControled);
         this.player.material.color.set(this._colors[0]);
 
-        if (nextOne < 0) {
-            var min = Infinity; var nextOne;
-            for (var i = 0; i < this.players.length; i++) {
-                var dist = this.players[i].mesh.position.distanceTo(ball.position);
-                if (dist < min && i != this._current) {
-                    min = dist; nextOne = i;
+        if (this.goalieEnable && !this.goalieControled) {
+            console.log("perfect");
+            this.goalieControled = true;
+        } else {
+            this.goalieControled = false;
+            if (nextOne < 0) {
+                var min = Infinity; var nextOne;
+                for (var i = 0; i < this.players.length; i++) {
+                    var dist = this.players[i].mesh.position.distanceTo(ball.position);
+                    if (dist < min && i != this._current) {
+                        min = dist; nextOne = i;
+                    }
                 }
             }
+            this._current = nextOne;
         }
-        this._current = nextOne;
 
         this.player.material.color.set(this._colors[1]);
-    }
-    playGoalie() {
-
-
     }
 
 
