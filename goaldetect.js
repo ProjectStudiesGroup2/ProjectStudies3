@@ -1,3 +1,4 @@
+// *** Detector geometry ***//
 var detGeometry = new THREE.CubeGeometry(20, 8, 0.3);
 var detMaterial = new THREE.MeshBasicMaterial({ wireframe: true, visible: true });
 var detector = new THREE.Mesh(detGeometry, detMaterial);
@@ -19,7 +20,6 @@ scoresprite.position.set(5, 10, 5);
 scene.add(scoresprite);
 console.log("hello",scoresprite);
 
-// *** *** //
 function makeTextSprite( message, parameters )
 {
   if( parameters === undefined ) parameters = {};

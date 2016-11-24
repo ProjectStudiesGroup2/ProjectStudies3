@@ -78,5 +78,3 @@ scene.add(crossbar1);
 scene.add(postL2);
 scene.add(postR2);
 scene.add(crossbar2);
-
-    //*** Net ***//
