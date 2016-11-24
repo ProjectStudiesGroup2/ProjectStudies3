@@ -9,6 +9,7 @@ class Team {
         this.playerRotation = 0;
         this._colors = colors;
         this._triggerMax = 0;
+        this.goalieEnable = false;
 
         for (var i = 0; i < 4; i++) {
             switch (i) {
@@ -233,7 +234,7 @@ var team1 = new Team({
         left: "KeyW",
         right: "KeyS",
         swap: "KeyE"
-            
+
     },
     // [0x805900, 0xbf8600],
     [0x7F0000, 0xB30B0B],
@@ -246,7 +247,7 @@ var team2 = new Team({
         left: "KeyI",
         right: "KeyK",
         swap2: "KeyO"
-        
+
     },
     // [0x550080, 0x8000bf],
     [0x19198E, 0x2C2CF5],

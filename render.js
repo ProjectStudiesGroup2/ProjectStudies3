@@ -5,36 +5,40 @@ var render = function() {
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
         target.copy(team1.player.position);
-
-        if (team1.player.position.z >= 65 || team1.player.position.z <= -65) {
-            target.copy(team1.player.position);
-            camera.position.x = 5;
-            toggle();
-        } else {
-            camera.position.x = 95;
-            target.copy(team1.player.position);
-            untoggle();
-        }
-
     } else if (collisionDet2 == true) {
         camera.position.z = team2.player.position.z;
-
-        if (team2.player.position.z >= 65 || team2.player.position.z <= -65) {
-            target.copy(team2.player.position);
-            camera.position.x = 5;
-            toggle();
-        } else {
-            camera.position.x = 95;
-            target.copy(team2.player.position);
-            untoggle();
-        }
-
+        target.copy(team2.player.position);
     } else {
         camera.position.z = ball.position.z;
         target.copy(ball.position);
     }
+
+    if (Math.abs(ball.position.z) > 55 && Math.abs(ball.position.x) < 35) {
+        camera.position.x = 5;
+        toggle();
+
+        if (ball.position.z > 0) {
+            team1.goalieEnable = false;
+            team2.goalieEnable = true;
+        } else {
+            team1.goalieEnable = true;
+            team2.goalieEnable = false;
+        }
+    } else {
+        camera.position.x = 95;
+        untoggle();
+
+        team1.goalieEnable = false;
+        team2.goalieEnable = false;
+    }
+
     target.x = 0;
     camera.lookAt(target);
+
+
+    if (team1.goalieEnable) { console.log("team1"); }
+    else if (team2.goalieEnable) { console.log("team2"); }
+    else { console.log("00000"); }
 
 
     if (gamepads[0]) {
