@@ -17,16 +17,14 @@ var render = function() {
 
     if (Math.abs(ball.position.z) >= 45 && Math.abs(ball.position.x) <= 35) {
         camera.position.x = 60;
-        camera.position.y = 60;        
-        fans.volume = 0.7;
+        camera.position.y = 60; 
 
         if (ball.position.z > 0) {
             team1.goalieEnable = true;
         } else if ((ball.position.z <= 0) ) {
             team2.goalieEnable = true;
         }
-    } else {                
-        fans.volume = 0.6;
+    } else {            
         camera.position.x = 95;
         camera.position.y = 80;
         team1.goalieEnable = false;
