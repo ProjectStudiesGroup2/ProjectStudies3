@@ -2,7 +2,7 @@ var target = new THREE.Vector3(0, 0, 0);
 var render = function() {
     requestAnimationFrame(render);
 
-    // detector.lookAt(camera.position);   //change this for the over-gate goal counter
+    // scoresprite.lookAt(camera.position);   //change this for the over-gate goal counter
 
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
@@ -43,14 +43,23 @@ var render = function() {
       var directionVector = globalVertex.sub(ball.position);
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-      var collisionResults = ray.intersectObjects(collidableMeshList2);
+      var collisionResults = ray.intersectObject(detector);
       if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
-        console.log('GOAL!');
+        scoreT1++;
+        message = scoreT1;
+
+        scoresprite.materialScore.map.needsUpdate = true;
+        resetBall();
+        console.log('GOAL! on gate R', scoreT1);
+      };
+      var ray2 = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+      var collisionResults2 = ray2.intersectObject(detector2);
+      if (collisionResults2.length > 0 && collisionResults2[0].distance < directionVector.length()){
+        scoreT2++;
+        resetBall();
+        console.log('GOAL! on gate L', scoreT2);
       };
     }
-
-      //*** Goal Output ***//
-
 
     detectCollision();
     if (collisionDet == true) {
@@ -72,19 +81,18 @@ var render = function() {
       }
 
       //*** Ball reset ***//
-    if ( ball.position.x <= -fieldWidth/1.7 || ball.position.x >= fieldWidth/1.7 ) {
+    if ( ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2 ) {
         playWhistle();
         resetBall();
     }
-    else if ( ball.position.z <= -fieldHeight/1.8 ) {
+    else if ( ball.position.z <= -fieldHeight/2.2 ) {
         resetBallToRight();
         playWhistle();
     }
-    else if ( ball.position.z >= fieldHeight/1.8 ) {
+    else if ( ball.position.z >= fieldHeight/2.2 ) {
         resetBallToLeft();
         playWhistle();
     }
-
 
     //*** Animated Texture ***//
     var delta = clock.getDelta();
@@ -92,7 +100,6 @@ var render = function() {
     // animR.update(1000 * delta);
     animTop.update(1000 * delta);
     animBot.update(1000 * delta);
-
 
     scene.simulate();
     renderer.render(scene, camera);
