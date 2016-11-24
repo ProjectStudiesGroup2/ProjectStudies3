@@ -1,13 +1,12 @@
     //*** Texture ***//
 var textureGrass = textureLoader.load("textures/field.jpg");
 textureGrass.anisotropy = 3;
+
 var textureGrassAround = textureLoader.load("textures/grass.png");
 textureGrassAround.anisotropy = 5;
 textureGrassAround.wrapS = THREE.RepeatWrapping;
 textureGrassAround.wrapT = THREE.RepeatWrapping;
 textureGrassAround.repeat.set( 6, 6 );
-// textureGrass.wrapS = textureGrass.wrapT = THREE.RepeatWrapping;
-// textureGrass.repeat.set(11, 11);
 
     //*** Field ***//
 var fieldWidth = 101, fieldHeight = 200;
@@ -63,14 +62,14 @@ var postR2 = new Physijs.CylinderMesh(postGeometry, postMaterial, 0);
 var crossbar2 = new Physijs.CylinderMesh(crossGeometry, postMaterial, 0);
 
 var goalHeight = 8;
-postL1.position.set(-10, goalHeight - 8.6, -85);
-postR1.position.set(10, goalHeight - 8.6, -85);
-crossbar1.position.set(0, goalHeight - 4, -85);
+postL1.position.set(-10, goalHeight - 8.6, -89);
+postR1.position.set(10, goalHeight - 8.6, -89);
+crossbar1.position.set(0, goalHeight - 4, -89);
 crossbar1.rotation.z = -.5 * Math.PI;
 
-postL2.position.set(-10, goalHeight - 8.6, 85);
-postR2.position.set(10, goalHeight - 8.6, 85);
-crossbar2.position.set(0, goalHeight - 4, 85);
+postL2.position.set(-10, goalHeight - 8.6, 89);
+postR2.position.set(10, goalHeight - 8.6, 89);
+crossbar2.position.set(0, goalHeight - 4, 89);
 crossbar2.rotation.z = -.5 * Math.PI;
 
 scene.add(postL1);
@@ -79,7 +78,6 @@ scene.add(crossbar1);
 scene.add(postL2);
 scene.add(postR2);
 scene.add(crossbar2);
-
 
     //*** Side Bumpers ***//
 var sideTextureL = textureLoader.load('explosion.jpg');
