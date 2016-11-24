@@ -5,14 +5,13 @@ var render = function() {
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
         target.copy(team1.player.position);
-        
+
         if (team1.player.position.z >= 65 || team1.player.position.z <= -65) {
-            while (camera.position.x >= 5) {
-                camera.position.x -= 1;
-                target.copy(team1.player.position);
-            }
+            target.copy(team1.player.position);
+            camera.position.x = 5;
             toggle();
         } else {
+            camera.position.x = 95;
             target.copy(team1.player.position);
             untoggle();
         }
@@ -21,12 +20,11 @@ var render = function() {
         camera.position.z = team2.player.position.z;
 
         if (team2.player.position.z >= 65 || team2.player.position.z <= -65) {
-            while (camera.position.x >= 5) {
-                camera.position.x -= 1;
-                target.copy(team2.player.position);
-            }
+            target.copy(team2.player.position);
+            camera.position.x = 5;
             toggle();
         } else {
+            camera.position.x = 95;
             target.copy(team2.player.position);
             untoggle();
         }
