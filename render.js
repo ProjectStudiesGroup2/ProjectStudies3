@@ -2,6 +2,8 @@ var target = new THREE.Vector3(0, 0, 0);
 var render = function() {
     requestAnimationFrame(render);
 
+    // scoresprite.lookAt(camera.position);   //change this for the over-gate goal counter
+
     if (collisionDet == true) {
         camera.position.z = team1.player.position.z;
         target.copy(team1.player.position);
@@ -32,6 +34,32 @@ var render = function() {
         team2.AIPlayers[i].useAI();
     }
 
+      //*** Goal Detector ***//
+    var originPoint = ball.position.clone();
+
+    for (var vertexIndex = 0; vertexIndex < ball.geometry.vertices.length; vertexIndex++){
+      var localVertex = ball.geometry.vertices[vertexIndex].clone();
+      var globalVertex = localVertex.applyMatrix4(ball.matrix);
+      var directionVector = globalVertex.sub(ball.position);
+
+      var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+      var collisionResults = ray.intersectObject(detector);
+      if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
+        scoreT1++;
+        message = scoreT1;
+
+        scoresprite.materialScore.map.needsUpdate = true;
+        resetBall();
+        console.log('GOAL! on gate R', scoreT1);
+      };
+      var ray2 = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+      var collisionResults2 = ray2.intersectObject(detector2);
+      if (collisionResults2.length > 0 && collisionResults2[0].distance < directionVector.length()){
+        scoreT2++;
+        resetBall();
+        console.log('GOAL! on gate L', scoreT2);
+      };
+    }
 
     detectCollision();
     if (collisionDet == true) {
@@ -46,26 +74,25 @@ var render = function() {
     }
 
       //*** Start game ***//
-      if (start == true) {  
+      if (start == true) {
         resetBall();
-        playWhistle();  
+        playWhistle();
         start = false;
       }
 
       //*** Ball reset ***//
-    if ( ball.position.x <= -fieldWidth/1.7 || ball.position.x >= fieldWidth/1.7 ) {        
+    if ( ball.position.x <= -fieldWidth/2 || ball.position.x >= fieldWidth/2 ) {
         playWhistle();
-        resetBall();   
+        resetBall();
     }
-    else if ( ball.position.z <= -fieldHeight/1.8 ) {
+    else if ( ball.position.z <= -fieldHeight/2.2 ) {
         resetBallToRight();
         playWhistle();
     }
-    else if ( ball.position.z >= fieldHeight/1.8 ) {
+    else if ( ball.position.z >= fieldHeight/2.2 ) {
         resetBallToLeft();
-        playWhistle();  
+        playWhistle();
     }
-        
 
     //*** Animated Texture ***//
     var delta = clock.getDelta();
@@ -73,7 +100,6 @@ var render = function() {
     // animR.update(1000 * delta);
     animTop.update(1000 * delta);
     animBot.update(1000 * delta);
-
 
     scene.simulate();
     renderer.render(scene, camera);

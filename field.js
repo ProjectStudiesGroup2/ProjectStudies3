@@ -1,13 +1,12 @@
     //*** Texture ***//
 var textureGrass = textureLoader.load("textures/field.jpg");
 textureGrass.anisotropy = 3;
+
 var textureGrassAround = textureLoader.load("textures/grass.png");
 textureGrassAround.anisotropy = 5;
 textureGrassAround.wrapS = THREE.RepeatWrapping;
 textureGrassAround.wrapT = THREE.RepeatWrapping;
 textureGrassAround.repeat.set( 6, 6 );
-// textureGrass.wrapS = textureGrass.wrapT = THREE.RepeatWrapping;
-// textureGrass.repeat.set(11, 11);
 
     //*** Field ***//
 var fieldWidth = 101, fieldHeight = 200;
@@ -63,14 +62,14 @@ var postR2 = new Physijs.CylinderMesh(postGeometry, postMaterial, 0);
 var crossbar2 = new Physijs.CylinderMesh(crossGeometry, postMaterial, 0);
 
 var goalHeight = 8;
-postL1.position.set(-10, goalHeight - 8.6, -85);
-postR1.position.set(10, goalHeight - 8.6, -85);
-crossbar1.position.set(0, goalHeight - 4, -85);
+postL1.position.set(-10, goalHeight - 8.6, -89);
+postR1.position.set(10, goalHeight - 8.6, -89);
+crossbar1.position.set(0, goalHeight - 4, -89);
 crossbar1.rotation.z = -.5 * Math.PI;
 
-postL2.position.set(-10, goalHeight - 8.6, 85);
-postR2.position.set(10, goalHeight - 8.6, 85);
-crossbar2.position.set(0, goalHeight - 4, 85);
+postL2.position.set(-10, goalHeight - 8.6, 89);
+postR2.position.set(10, goalHeight - 8.6, 89);
+crossbar2.position.set(0, goalHeight - 4, 89);
 crossbar2.rotation.z = -.5 * Math.PI;
 
 scene.add(postL1);
@@ -80,7 +79,6 @@ scene.add(postL2);
 scene.add(postR2);
 scene.add(crossbar2);
 
-
     //*** Side Bumpers ***//
 var sideTextureL = textureLoader.load('explosion.jpg');
 animL = new TextureAnimator(sideTextureL, 4, 4, 16, 55);
@@ -88,11 +86,11 @@ var sideGeometryL = new THREE.PlaneGeometry(220, 8, 0);
 var sideMaterialL = new THREE.MeshLambertMaterial({ map: sideTextureL })
 var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 
-// var sideTextureR = textureLoader.load('explosion.jpg');
-// animR = new TextureAnimator(sideTextureR, 4, 4, 16, 55);
-// var sideGeometryR = new THREE.PlaneGeometry(200, 8, 0);
-// var sideMaterialR = new THREE.MeshLambertMaterial({ map: sideTextureR })
-// var sideR = new Physijs.Mesh(sideGeometryR, sideMaterialR);
+var sideTextureR = textureLoader.load('explosion.jpg');
+animR = new TextureAnimator(sideTextureR, 4, 4, 16, 55);
+var sideGeometryR = new THREE.PlaneGeometry(200, 8, 0);
+var sideMaterialR = new THREE.MeshLambertMaterial({ map: sideTextureR })
+var sideR = new Physijs.Mesh(sideGeometryR, sideMaterialR);
 
 var sideTextureTop = textureLoader.load('explosion.jpg');
 animTop = new TextureAnimator(sideTextureTop, 4, 4, 16, 55);
@@ -109,15 +107,15 @@ var sideBot = new Physijs.Mesh(sideGeometryBot, sideMaterialBot);
 sideL.position.set(-59, -2, 0);
 sideGeometryL.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / 2));
 sideGeometryL.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / 5));
-// sideR.position.set(57, -2, 0);
-// sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / -2));
-// sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / -5));
+sideR.position.set(57, -2, 0);
+sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / -2));
+sideGeometryR.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / -5));
 sideTop.position.set(0, -2, -110);
 sideGeometryTop.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / -5));
 sideBot.position.set(0, -2, 110);
 sideGeometryBot.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI * 7));
 scene.add(sideL);
-// scene.add(sideR);
+scene.add(sideR);
 scene.add(sideTop);
 scene.add(sideBot);
 

@@ -1,7 +1,7 @@
                 /************\
                 |*   Ball   *|
                 \************/
-// To detect starting point of the game 
+// To detect starting point of the game
 var start = true;
 
 // For collision detection
@@ -86,7 +86,7 @@ function kickBall(strength, direct) {
     var kick2 = new Audio('sounds/2.mp3');
     var kick3 = new Audio('sounds/3.mp3');
     var kick4 = new Audio('sounds/4.mp3');
-    var audioArray = [kick1, kick2, kick3, kick4]; 
+    var audioArray = [kick1, kick2, kick3, kick4];
     var audio = audioArray[Math.floor(Math.random() * audioArray.length)];
     audio.play();
     collisionDet = false;
@@ -107,7 +107,7 @@ document.addEventListener('keyup', event => {
         kickBall(12, 2);
     }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 5 ||
-        event.code == "Space" && collisionDet2 == true && strengthTimer <= 5 ) {
+             event.code == "Space" && collisionDet2 == true && strengthTimer <= 5 ) {
         kickBall(23, 5);
     }
     else if (event.code == "Space" && collisionDet == true && strengthTimer <= 8 ||
@@ -168,7 +168,7 @@ function resetBallToRight(event) {
     ball.rotation.set(0, 0, 0);
     ball.__dirtyRotation = true;
     ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-    ball.setAngularVelocity({ x: 0, y: 0, z: 0 }); 
+    ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
     return false;
 }
 
@@ -181,7 +181,7 @@ function resetBallToLeft(event) {
     ball.rotation.set(0, 0, 0);
     ball.__dirtyRotation = true;
     ball.setLinearVelocity({ x: 0, y: 0, z: 0 });
-    ball.setAngularVelocity({ x: 0, y: 0, z: 0 }); 
+    ball.setAngularVelocity({ x: 0, y: 0, z: 0 });
     return false;
 }
 
@@ -190,9 +190,9 @@ function playWhistle() {
     var whistle = new Audio('sounds/03963.mp3');
     var whistle2 = new Audio('sounds/03964.mp3');
     var whistle3 = new Audio('sounds/03965.mp3');
-    var myArray = [whistle, whistle2, whistle3]; 
-    var rand = myArray[Math.floor(Math.random() * myArray.length)];    
+    var myArray = [whistle, whistle2, whistle3];
+    var rand = myArray[Math.floor(Math.random() * myArray.length)];
     rand.volume = 0.9;
-    rand.play(); 
+    rand.play();
     return false;
 }
