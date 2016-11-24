@@ -62,4 +62,4 @@ var scoreT1 = 0, scoreT2 = 0;
 //   var sprite = new THREE.Sprite( spriteMaterial );
 //   sprite.scale.set(100, 50, 1.0);
 //   return sprite;
-}
+// }
