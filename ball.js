@@ -55,7 +55,7 @@ function detectCollision() {
             var collisionResults = ray.intersectObjects( collidableMeshList );
             if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()+0.08 ) {
                 collisionDet = true;
-                collisionDet2 = false;
+                collisionDet2 = false; 
             }
         }
 }
