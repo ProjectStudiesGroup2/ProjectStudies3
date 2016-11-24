@@ -111,7 +111,7 @@ class Team {
                     audioRun.pause();
                     break;
             }
-        }, false);        
+        }, false);
 
         var mouse = new THREE.Vector3(),
             ray = new THREE.Raycaster( new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,0) ),
@@ -142,7 +142,7 @@ class Team {
                     -(intersects[0].point.z - this.player.position.z)
                 );
             }
-        })
+        });
     }
 
 
@@ -182,21 +182,22 @@ class Team {
         ));
 
         this.rotatePlayer(
-            Math.abs(gamepad.axes[3]) > 0.25 ? -gamepad.axes[3] : 0,
-            Math.abs(gamepad.axes[4]) > 0.25 ? -gamepad.axes[4] : 0
+            Math.abs(gamepad.axes[4]) > 0.25 ? -gamepad.axes[4] : 0,
+            Math.abs(gamepad.axes[3]) > 0.25 ? gamepad.axes[3] : 0
         );
 
 
-        if (gamepad.buttons[0].pressed && !this._pressed["GamepadA"] && collisionDet == false) {
+        if (gamepad.buttons[0].pressed && !this._pressed["GamepadA"] &&
+                (collisionDet == false && this == team1 || collisionDet2 == false && this == team2)) {
             this._pressed["GamepadA"] = true;
             this.changePlayer();
         } else if (!gamepad.buttons[0].pressed && this._pressed["GamepadA"]) {
             this._pressed["GamepadA"] = false;
         }
-        if (collisionDet == true) {
+        if (collisionDet == true || collisionDet2 == true) {
             var stength = (gamepad.axes[5] + 1) / 2;
             if (this._triggerMax > stength) {
-                kickBall(this._triggerMax * 62);
+                kickBall(this._triggerMax * 62, 7);
                 this._triggerMax = 0;
             } else {
                 this._triggerMax = stength;
