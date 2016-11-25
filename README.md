@@ -9,8 +9,7 @@ Implemented using Three.js with physical engine.
 ## Feature requirements
 
 ####Multiplayer
-The game can be played by two users. There are two teams: Red and Blue. Each user has a top view from own goal gates side.
-It is possible to choose a team and name it with any desired name.
+The game can be played by two users. There are two teams: Red and Blue. Each user has a top view from a side.
 
 ####Switching between players in a team
 Both users are able to switch between the players in their own teams to generate some tactics and have better experience
