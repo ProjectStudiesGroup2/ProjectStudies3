@@ -15,7 +15,7 @@ var render = function() {
         target.copy(ball.position);
     }
 
-    if (Math.abs(ball.position.z) >= 45 && Math.abs(ball.position.x) <= 35) {
+    if (Math.abs(ball.position.z) >= 55 && Math.abs(ball.position.x) <= 35) {
         camera.position.x = 60;
         camera.position.y = 60;
 

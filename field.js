@@ -80,25 +80,25 @@ scene.add(postR2);
 scene.add(crossbar2);
 
     //*** Side Bumpers ***//
-var sideTextureL = textureLoader.load('explosion.jpg');
+var sideTextureL = textureLoader.load('img/explosion.jpg');
 animL = new TextureAnimator(sideTextureL, 4, 4, 16, 55);
 var sideGeometryL = new THREE.PlaneGeometry(220, 8, 0);
 var sideMaterialL = new THREE.MeshLambertMaterial({ map: sideTextureL })
 var sideL = new Physijs.Mesh(sideGeometryL, sideMaterialL);
 
-var sideTextureR = textureLoader.load('explosion.jpg');
+var sideTextureR = textureLoader.load('img/explosion.jpg');
 animR = new TextureAnimator(sideTextureR, 4, 4, 16, 55);
 var sideGeometryR = new THREE.PlaneGeometry(200, 8, 0);
 var sideMaterialR = new THREE.MeshLambertMaterial({ map: sideTextureR })
 var sideR = new Physijs.Mesh(sideGeometryR, sideMaterialR);
 
-var sideTextureTop = textureLoader.load('explosion.jpg');
+var sideTextureTop = textureLoader.load('img/explosion.jpg');
 animTop = new TextureAnimator(sideTextureTop, 4, 4, 16, 55);
 var sideGeometryTop = new THREE.PlaneGeometry(116, 8, 0);
 var sideMaterialTop = new THREE.MeshLambertMaterial({ map: sideTextureTop })
 var sideTop = new Physijs.Mesh(sideGeometryTop, sideMaterialTop);
 
-var sideTextureBot = textureLoader.load('explosion.jpg');
+var sideTextureBot = textureLoader.load('img/explosion.jpg');
 animBot = new TextureAnimator(sideTextureBot, 4, 4, 16, 55);
 var sideGeometryBot = new THREE.PlaneGeometry(116, 8, 0);
 var sideMaterialBot = new THREE.MeshLambertMaterial({ map: sideTextureBot })
