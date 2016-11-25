@@ -10,56 +10,23 @@ scene.add(detector);
 scene.add(detector2);
 
     //*** Score function ***//
+
 var scoreT1 = 0, scoreT2 = 0;
 
     //*** Score Output ***//
 
+var materialFore = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+var materialBack = new THREE.MeshBasicMaterial( { color: 0x000088 } );
+var materialArray = [ materialFore, materialBack ];
+var goalText = new THREE.TextGeometry(scoreT1, {
+  size: 30,
+  font: "helvetiker"
+});
 
+var textMaterial = new THREE.MeshFaceMaterial(materialArray);
+var textMesh = new THREE.Mesh(goalText, textMaterial);
 
-    // ** keep for now I'll delete it later
-// var scoresprite = makeTextSprite( "Score: "+scoreT1, {
-//   fontsize: 30, borderColor: 0x5e0fad, backgroundColor: 0x1f20b0 });
-// scoresprite.position.set(0, goalHeight -3, -135);
-// var scoresprite2 = makeTextSprite( "Score: "+scoreT2, {
-//   fontsize: 30, borderColor: 0x5e0fad, backgroundColor: 0x1f20b0 });
-// scoresprite2.position.set(0, goalHeight -3, 135);
-// scene.add(scoresprite);
-// scene.add(scoresprite2);
-//
-// function makeTextSprite( message, parameters )
-// {
-//   if( parameters === undefined ) parameters = {};
-//   var fontface = parameters.hasOwnProperty("fontface") ?
-//       parameters["fontface"] : "Arial";
-//   var fontsize = parameters.hasOwnProperty("fontsize") ?
-//       parameters["fontsize"] : 18;
-//   var borderThickness = parameters.hasOwnProperty("borderThickness") ?
-//       parameters["borderThickness"] : 4;
-//   var borderColor = parameters.hasOwnProperty("borderColor") ?
-//       parameters["borderColor"] : 0x5e0fad;
-//   var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
-//       parameters["backgroundColor"] : 0x1f20b0;
-//   var canvas = document.createElement('canvas');
-//   var context = canvas.getContext('2d');
-//   context.font = "Bold" + fontsize + "px" + fontface;
-//   var metrics = context.measureText(message);
-//   var textWidth = metrics.width;
-//
-//   context.fillStyle = 0x1f20b0;
-//   context.strokeStyle = 0x5e0fad;
-//   context.lineWidth = borderThickness;
-//
-//   context.fillStyle = "rgba(255, 0, 0, 1.0)";
-//   context.fillText( message, borderThickness, fontsize + borderThickness);
-//
-//   var texture = new THREE.Texture(canvas)
-//   texture.needsUpdate = true;
-//
-//   var materialScore = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
-//   materialScore.transparent = true;
-//   var spriteMaterial = new THREE.SpriteMaterial(
-//       { map: texture });
-//   var sprite = new THREE.Sprite( spriteMaterial );
-//   sprite.scale.set(100, 50, 1.0);
-//   return sprite;
-// }
+goalText.computeBoundingBox();
+var textWidth = goalText.boundingBox.max.x - goalText.boundingBox.min.x;
+textMesh.position.set(0, 10, 0);
+scene.add(textMesh);
