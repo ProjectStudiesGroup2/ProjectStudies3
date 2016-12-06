@@ -6,9 +6,26 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
+        <div class="controls">
+            <h3>The Football game</h3>
+            <p> You can control players from Red (left) team with <img src="css/Wbar.png" class="img2">, <img src="css/Abar.png" class="img2">, 
+                <img src="css/Sbar.png" class="img2">, <img src="css/Dbar.png" class="img2">. To switch between players press <img src="css/Ebar.png" class="img2">. </p> 
+            <p> To control Blue (right) team use <img src="css/Ibar.png" class="img2">, <img src="css/Jbar.png" class="img2">, <img src="css/Kbar.png" class="img2">, 
+                <img src="css/Lbar.png" class="img2"> and <img src="css/Obar.png" class="img2"> to switch player.</p>
+            <p> Press <img src="css/spacebar.png" class="img"> to kick the ball. The longer you hold space, the more powerfull will be your kick.</p>              
+            <p> Ball direction depends on a <img src="css/cursor.png" class="img3"> (cursor) position on the screen.</p>            
+            <p> Goalkeeper can be controled when the ball is close to goal gates. Press <img src="css/Ebar.png" class="img2"> or <img src="css/Obar.png" class="img2">
+                to switch on a goalkeeper.</p>
+            <p> Game supports gamepad, so you can play with your friend using two gamepads!</p>
+            <p><i> If the game is not working in your browser, try it in FireFox! Have a nice game! </i></p>        
+            <p id="ok"><a>Ok, I got it!</a></p>
+        </div>   
+        <p class="showCntr"><a>Show the controls</a></p>
 
-        <p class="message m1">RED Team: <a id="score1"></a></p>
-        <p class="message m2">BLUE Team: <a id="score2"></a></p>
+        <div class="score"> 
+            <p class="message m1">RED: <a id="score1"></a></p>
+            <p class="message m2">BLUE: <a id="score2"></a></p>
+        </div>
 
         <script src="libraries/jquery-3.1.1.min.js" charset="utf-8"></script>
         <script src="libraries/KeyboardState.js" charset="utf-8"></script>

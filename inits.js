@@ -26,3 +26,18 @@ function gamepadHandler(event, connecting) {
 
 window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
 window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
+
+        /******************************\
+        |*   Interface for controls   *|
+        \******************************/
+$('.showCntr').hide();
+
+$('#ok').click(function() {
+    $('.controls').hide();
+    $('.showCntr').show();
+});
+
+$('.showCntr').click(function() {
+    $('.controls').show();
+    $('.showCntr').hide();
+});
